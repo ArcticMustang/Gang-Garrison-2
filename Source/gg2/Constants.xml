@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <constants>
-  <constant name="VERSION" value="26700"/>
-  <constant name="GAME_VERSION_STRING" value="&quot;v2.6.7&quot;"/>
+  <constant name="VERSION" value="26900"/>
+  <constant name="GAME_VERSION_STRING" value="&quot;v2.6.9&quot;"/>
   <constant name="GAME_NAME_STRING" value="&quot;Gang Garrison 2&quot;"/>
   <constant name="GAME_URL_STRING" value="&quot;http://www.ganggarrison.com/&quot;"/>
   <constant name="PLUGIN_SOURCE" value="&quot;http://www.ganggarrison.com/plugins/&quot;"/>
@@ -162,4 +162,7 @@
   <constant name="MUSIC_BOTH" value="1"/>
   <constant name="MUSIC_INGAME_ONLY" value="2"/>
   <constant name="MUSIC_NONE" value="3"/>
+  <constant name="BOOT_BEHAVIOUR" value="0"/>
+  <constant name="BOOT_STANDARD" value="0"/>
+  <constant name="BOOT_DEBUG" value="1"/>
 </constants>
