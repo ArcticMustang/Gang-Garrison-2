@@ -58,6 +58,11 @@
     menu_add_option(MUSIC_INGAME_ONLY, "In-Game Only");
     menu_add_option(MUSIC_BOTH, "Menu and In-Game");
     
+    menu_addedit_num("Global Volume:", "global.globalVolume", "
+        gg2_write_ini('Settings', 'Global Volume', argument0);
+        faudio_set_global_volume((argument0/100))
+    ", 100); 
+    
     menu_addedit_select("Particles:", "global.particles", '
         gg2_write_ini("Settings", "Particles", argument0);
     ');

@@ -18,6 +18,8 @@ timer=timeLimit;
 teamoffset=0;
 overtime = 0;
 global.setupTimer=1800;
+CountDown1Snd = faudio_new_generator(CountDown1SndS);
+CountDown2Snd = faudio_new_generator(CountDown2SndS);
 
 </argument>
       </arguments>

@@ -4,6 +4,8 @@
         faudio_stop_generator(argument2);
     }
     
+    if (global.globalVolume == 0) exit;
+    
     var vol;
     vol = calculateVolume(argument0, argument1);
     if(vol==0) exit;
