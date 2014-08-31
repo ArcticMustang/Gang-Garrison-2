@@ -18,6 +18,11 @@
     global.serializeBuffer = argument1;
 
     if argument0 != CAPS_UPDATE {
+            if instance_exists(PayloadCart){
+            with (PayloadCart){
+                event_user(12)
+            }
+            }
         for(i=0; i<ds_list_size(global.players); i+=1) {
             player = ds_list_find_value(global.players, i);
             with(player) {

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="1">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(instance_exists(MenuController))
+    exit;
+    
+var kickOpen;
+kickOpen = false
+if (instance_exists(ScoreTableController))
+    if (ScoreTableController.showadmin)
+        kickOpen = true;
+    
+if(instance_exists(TeamSelectController) || instance_exists(ClassSelectController) || kickOpen)
+    menuOpen = true;
+else
+    menuOpen = false;
+
+//Checking for input - Mapped Keys
+if(keyboard_check_pressed(global.changeTeam))
+    inputChangeTeam();
+if(keyboard_check_pressed(global.changeClass))
+    inputChangeClass();
+
+event_user(8);
+    
+var keybyte;
+keybyte = 0;
+
+/* KeyByte flags:
+    02 - down
+    
+    04 - medic call
+    08 - primary
+    10 - secondary
+    
+    20 - right
+    40 - left
+    80 - up
+*/
+
+//character object exists
+if(global.myself.object != -1)
+{
+    if(!menuOpen)
+    {
+        if(keyboard_check(global.left)) keybyte |= $40;
+        if(keyboard_check(global.right)) keybyte |= $20;
+        if(keyboard_check(global.jump)) keybyte |= $80;
+        if(keyboard_check(global.down)) keybyte |= $02;
+        if(keyboard_check_pressed(global.medic)) keybyte |= $04;
+        if(keyboard_check_pressed(global.chat1)) inputChat1();
+        if(keyboard_check_pressed(global.chat2)) inputChat2();
+        if(keyboard_check_pressed(global.chat3)) inputChat3();
+        if(keyboard_check_pressed(global.drop)) inputDrop();
+        
+        if(!global.myself.humiliated)
+        {
+            if(keyboard_check(global.attack)) keybyte |= $10;
+            if(keyboard_check(global.special)) keybyte |= $08;
+            if(keyboard_check_pressed(global.special)) inputSpecial();
+            if(keyboard_check_pressed(global.taunt))
+            {
+                keybyte |= $01;
+                inputTaunt();
+            }
+            if(mouse_check_button(mb_left))
+            {
+                if(global.attack == MOUSE_LEFT) keybyte |= $10;
+                if(global.special == MOUSE_LEFT) keybyte |= $08;
+            }
+            if(mouse_check_button_pressed(mb_left) and global.special == MOUSE_LEFT)
+                inputSpecial();
+
+            if(mouse_check_button(mb_right))
+            {
+                if(global.attack == MOUSE_RIGHT) keybyte |= $10;
+                if(global.special == MOUSE_RIGHT) keybyte |= $08;
+            }
+            if(mouse_check_button_pressed(mb_right) and global.special == MOUSE_RIGHT)
+                inputSpecial();
+            
+        }
+    }
+    
+    if(global.run_virtual_ticks or keyboard_check_pressed(global.taunt))
+        ClientInputstate(global.serverSocket, keybyte);
+    socket_send(global.serverSocket);
+}
+// spectator controls
+else if (instance_exists(Spectator))
+{
+    if(!menuOpen)
+    {
+        if(mouse_check_button_pressed(mb_left))
+            with (Spectator) event_user(7);
+        if(mouse_check_button_pressed(mb_right))
+            with (Spectator) event_user(8);
+    }
+}
+
+if(keybyte != 0
+        or keyboard_check(global.left)
+        or keyboard_check(global.right)
+        or keyboard_check(global.jump)
+        or keyboard_check(global.down)) {
+    afktimer = afktimeout;
+}
+
+</argument>
+      </arguments>
+    </action>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">global.ability=ord("R")
+if(keyboard_check_pressed(global.ability))
+{
+if(global.myself.object != -1)
+{
+    if(!menuOpen)
+    {
+        if(!global.myself.humiliated)
+        {
+        
+var i, player;
+
+player = ds_list_find_value(global.players, global.playerID);
+
+if (player.team != TEAM_SPECTATOR)
+{
+    var existed;
+    
+    existed = 0;
+    
+    if instance_exists(BubbleMenuX) with (BubbleMenuX) instance_destroy();
+    if instance_exists(BubbleMenuC) with (BubbleMenuC) instance_destroy();
+    if instance_exists(BubbleMenuZ) with (BubbleMenuZ) instance_destroy();
+    if instance_exists(DisguiseOverlay)
+    {
+        DisguiseOverlay.done = true;
+        existed = 1;
+    }
+    if (existed == 0)
+    {
+        instance_create(x,y,DisguiseOverlay);             
+    }
+    else
+    {
+        DisguiseOverlay.done = true;       
+    }
+}
+        }
+        
+    }
+        
+}
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

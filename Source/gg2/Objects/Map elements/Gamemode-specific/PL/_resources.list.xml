@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="PayloadCart" type="RESOURCE"/>
+  <resource name="PayloadNode" type="RESOURCE"/>
+  <resource name="CartSmoke0" type="RESOURCE"/>
+</resources>

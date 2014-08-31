@@ -8,6 +8,7 @@
   <resource name="Accesory" type="RESOURCE"/>
   <resource name="Headgib" type="RESOURCE"/>
   <resource name="BloodDrop" type="RESOURCE"/>
+  <resource name="Spark" type="RESOURCE"/>
   <resource name="Blood" type="RESOURCE"/>
   <resource name="PartyHat" type="RESOURCE"/>
   <resource name="XmasHat" type="RESOURCE"/>

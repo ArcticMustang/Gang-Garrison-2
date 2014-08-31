@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">node=instance_nearest(x,y,PayloadNode);
+if point_distance(x,y,node.x,node.y)&lt;=abs(speed)+1 &amp;&amp; nextPoint=node.nodeNum{
+    x=node.x
+    y=node.y
+    onPoint=max(node.nodeNum-(speed&lt;0),minpoint)
+    distanceFromPoint = 0;
+    if speed &lt; 0 &amp;&amp; node.nodeNum = minpoint{
+        speed = 0
+        goingBack = 1;
+        speed = max(speed,0);
+    }
+
+    currentPoint=median(onPoint,minpoint,ds_list_size(movementPath)-1);  
+
+    
+    if speed!=0{
+        nextPoint=node.nodeNum+sign(speed)
+        
+    }else nextPoint=node.nodeNum+1;
+    
+direction = point_direction(x,y,getNodeStatus(nextPoint,'x'),getNodeStatus(nextPoint,'y'));
+
+if node.isAPoint{
+if speed &gt; 0{
+canMakeSound = true;
+}
+if node.nodeNum = ds_list_size(movementPath)-1{
+direction = 0;
+speed = 0;
+global.winners = TEAM_RED;
+}
+}
+
+
+
+}
+//Captures a control point if the cart is positioned on that point, then sets it as the minimum point.
+if speed &gt; 0{
+with ControlPoint{
+if (other.onPoint = pathPosition){
+if team != TEAM_RED &amp;&amp; other.canMakeSound = true cartCapture(cp);
+team = TEAM_RED;
+other.canMakeSound = false;
+locked=false;
+other.minpoint = pathPosition;
+}
+}
+}
+
+
+
+distanceFromPoint = point_distance(x,y,getNodeStatus(currentPoint,'x'),getNodeStatus(currentPoint,'y'));
+
+var selectedPoint;
+    selectedPoint = ds_list_find_value(movementPath,currentPoint);
+    distanceTraveled=selectedPoint.distance+distanceFromPoint;
+
+
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

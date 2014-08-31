@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="25">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">///////////////THIS CODE THANKS TO ORPHEON. A LOT OF MAGIC HAPPENS HERE.
+                    
+                                        
+                    var num_enemy_players, disguisedPlayer;
+                    
+                    disguisedPlayer=-1
+                    num_enemy_players = 0;
+                    disguiseablePlayers = ds_list_create();
+                    
+                    for(i=0; i&lt;ds_list_size(global.players); i+=1)
+                    {
+                        player = ds_list_find_value(global.players, i);
+                        if player.team == disguiseTeam
+                        {
+                            num_enemy_players += 1;
+                            if player.class == disguiseClass
+                            {
+                                ds_list_add(disguiseablePlayers,player)
+                            }
+                        }
+                    }
+                    
+                    if !ds_list_empty(disguiseablePlayers){
+                        disguisedPlayer=ds_list_find_value(disguiseablePlayers, irandom(ds_list_size(disguiseablePlayers)))
+                    }
+                    ds_list_destroy(disguiseablePlayers)
+                    disguiseName=disguisedPlayer.name
+                    if disguisedPlayer = -1 // Assuming this variable is -1 by default
+                    {
+                        // There is no suitable player with the same class
+                        // Take a random one
+                        var index;
+                        index = irandom(num_enemy_players); // Or whatever the function is
+     
+                    // Too lazy to indent on pastebin
+                    for(i=0; i&lt;ds_list_size(global.players); i+=1)
+                    {
+                        player = ds_list_find_value(global.players, i);
+                        if player.team == disguiseTeam
+                        {
+                            index -= 1;
+                            if index &lt; 0
+                            {
+                                disguisedPlayer = player;
+                                disguiseName = disguisedPlayer.name; // disguise* or disguised*?
+                            }
+                        }
+                    }                  
+     
+                  }
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">//If it works right, this hack should make the players REAL name invisible while the player is drawn, then make it visible again once the drawing process is over.
+tempName=player.name
+if disguiseName!="#" &amp;&amp; disguised{
+
+if global.myself.team!=team &amp;&amp; disguised &amp;&amp; global.myself.team!=TEAM_SPECTATOR &amp;&amp; hp&gt;0{
+namelen=string_length(player.name)
+player.name=""//set the player name to something invisible
+repeat(namelen) player.name+=" "; //Add a space for every character in their name
+}
+}
+event_inherited()
+player.name=tempName;
+
+    xoffset = view_xview[0];
+    yoffset = view_yview[0];
+    xsize = view_wview[0];
+    ysize = view_hview[0];
+    
+if distance_to_point(xoffset+xsize/2,yoffset+ysize/2) &gt; 800 exit;
+    var xr, yr;
+    xr = round(x);
+    yr = round(y);
+        
+    if global.myself == -1 &amp;&amp; cloakAlpha==1{
+        image_alpha = 1;
+    } else if((global.myself.object == id &amp;&amp; cloakAlpha==1) || (global.myself.object == -1)) {
+        image_alpha = 1;
+    } else if (!invisible) {
+        image_alpha = cloakAlpha;
+    } else {
+        exit;
+    }
+    
+if disguised{
+    if ((disguiseTeam==global.myself.team &amp;&amp; !cloak))&amp;&amp; id != global.myself.object.id &amp;&amp; team!=global.myself.team &amp;&amp; global.myself.team!=TEAM_SPECTATOR{
+    draw_set_alpha(1);
+    draw_healthbar(xr-10, yr-30+quote_y_offset, xr+10, yr-25+quote_y_offset,hp*100/maxHp,c_black,c_red,c_green,0,true,true);
+    
+if (ubered)
+{
+if (!noNewAnim)
+{
+    if(!onground)
+        sprite = spriteJump;
+    else
+    {
+        if(still)
+        {
+            // set up vars for slope detection
+            charSetSolids();
+            if(image_xscale &gt; 0)
+            {
+                sprite_tilt_left = spriteLeanL;
+                sprite_tilt_right = spriteLeanR;
+            }
+            else
+            {
+                sprite_tilt_left = spriteLeanR;
+                sprite_tilt_right = spriteLeanL;
+            }
+            
+            // default still sprite
+            sprite = spriteStand;
+            
+            { // detect slopes
+                var openright, openleft;
+                openright = !collision_point_solid(x+6, bbox_bottom+2) and !collision_point_solid(x+2, bbox_bottom+2);
+                openleft = !collision_point_solid(x-7, bbox_bottom+2) and !collision_point_solid(x-3, bbox_bottom+2);
+                if (openright)
+                    sprite = sprite_tilt_right;
+                if (openleft)
+                    sprite = sprite_tilt_left;
+                if (openright and openleft)
+                {
+                    openright = !collision_point_solid(bbox_right, bbox_bottom+2);
+                    openleft = !collision_point_solid(bbox_left, bbox_bottom+2);
+                    if (openright)
+                        sprite = sprite_tilt_right;
+                    if (openleft)
+                        sprite = sprite_tilt_left;
+                }
+            }
+                
+            charUnsetSolids();
+        }
+        else
+        {
+            sprite = spriteRun;
+        }
+    }
+    overlaySprite = overlay;
+}
+var ubercolor;
+        if disguiseTeam=TEAM_RED ubercolor=c_red;
+        if disguiseTeam=TEAM_BLUE ubercolor=c_blue;
+            draw_sprite_ext(sprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
+            draw_sprite_ext(sprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
+        }
+    
+    }
+}
+    
+if disguised &amp;&amp; global.myself.team!=other.team &amp;&amp; global.myself.team!=TEAM_SPECTATOR{
+if(distance_to_point(mouse_x, mouse_y)&lt;25) {
+        if cloak &amp;&amp; team!=global.myself.team exit;
+        draw_set_alpha(1);
+        draw_set_halign(fa_center);
+        draw_set_valign(fa_bottom);
+        if disguiseTeam=TEAM_RED{
+        draw_set_color(c_red);
+        }else{
+        draw_set_color(c_blue)
+        }
+        draw_text(xr, yr-35+quote_y_offset,disguiseName);
+    }  
+}
+if (disguised &amp;&amp; distance_to_point(mouse_x, mouse_y) &lt; 25)
+{
+    if (cloak and team != global.myself.team)
+        exit;
+
+    if global.myself.team=TEAM_RED draw_set_color(c_red);
+    else if global.myself.team=TEAM_BLUE draw_set_color(c_blue);
+    
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_bottom);
+    
+    if(disguiseTeam == global.myself.team &amp;&amp; team!=global.myself.team &amp;&amp; global.myself.team!=TEAM_SPECTATOR &amp;&amp; global.showTeammateStats)
+    {
+        if(disguiseClass=CLASS_MEDIC)
+            draw_text(xr,round(y)+50, "Superburst: " + randomSuperburst + "%");
+        else if(disguiseClass=CLASS_ENGINEER)
+            draw_text(xr,round(y)+50, "Nuts 'N' Bolts: " + "100");
+        else if(disguiseClass=CLASS_DEMOMAN)
+            draw_text(xr,round(y)+50, "Lobbed Mines: " + "0");
+    
+    
+    }
+    
+    if(disguised &amp;&amp; (team=global.myself.team || global.myself.team = TEAM_SPECTATOR) &amp;&amp; global.showTeammateStats)
+    {
+    
+            if global.myself.team !=TEAM_SPECTATOR{
+            if disguiseTeam=global.myself.team
+            draw_text(xr,round(y)+50, "Disguised as a friendly " + disguiseClassName);
+            else
+            draw_text(xr,round(y)+50, "Disguised as an enemy " + disguiseClassName);
+            }else if disguiseTeam=TEAM_RED
+            draw_text(xr,round(y)+50, "Disguised as a RED " + disguiseClassName);
+            else
+            draw_text(xr,round(y)+50, "Disguised as a BLU " + disguiseClassName);
+    }
+}
+
+if disguised &amp;&amp; player.team==global.myself.team || global.myself.team=TEAM_SPECTATOR{
+        if player.team == TEAM_RED ubercolour = c_red;
+        if player.team == TEAM_BLUE ubercolour = c_blue;
+        if ubered == 0{
+            draw_sprite_ext(MaskS,((disguiseClass)+10*disguiseTeam),xr,yr+overlayOffset,image_xscale,image_yscale,image_angle,c_white,image_alpha);
+        }else if ubered == 1 {
+            draw_sprite_ext(MaskS,((disguiseClass)+10*disguiseTeam),xr,yr+overlayOffset,image_xscale,image_yscale,image_angle,c_white,1);
+            draw_sprite_ext(MaskS,((disguiseClass)+10*disguiseTeam),xr,yr+overlayOffset,image_xscale,image_yscale,image_angle,ubercolour,0.7);
+            }
+}
+
+
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

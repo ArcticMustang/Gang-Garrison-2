@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">target = noone;
+hp[CLASS_SCOUT]=100;
+hp[CLASS_PYRO]=120;
+hp[CLASS_SOLDIER]=160;
+hp[CLASS_HEAVY]=200;
+hp[CLASS_DEMOMAN]=140;
+hp[CLASS_MEDIC]=120;
+hp[CLASS_ENGINEER]=120;
+hp[CLASS_SNIPER]=120;
+hp[CLASS_SPY]=100;
+hp[CLASS_QUOTE]=140;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

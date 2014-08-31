@@ -6,4 +6,5 @@
   <resource name="CP" type="GROUP"/>
   <resource name="KOTH" type="GROUP"/>
   <resource name="DKOTH" type="GROUP"/>
+  <resource name="PL" type="GROUP"/>
 </resources>

@@ -55,8 +55,11 @@
   <resource name="isBetaVersion" type="RESOURCE"/>
   <resource name="promptRestartOrQuit" type="RESOURCE"/>
   <resource name="split" type="RESOURCE"/>
+  <resource name="Payload" type="GROUP"/>
   <resource name="draw_pinched_blackrect" type="RESOURCE"/>
   <resource name="Faucet HTTP" type="GROUP"/>
   <resource name="move_all_bullets" type="RESOURCE"/>
   <resource name="move_all_gore" type="RESOURCE"/>
+  <resource name="setDisguise" type="RESOURCE"/>
+  <resource name="pickDisguiseSprites" type="RESOURCE"/>
 </resources>

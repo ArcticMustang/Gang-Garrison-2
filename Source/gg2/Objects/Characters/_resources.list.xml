@@ -7,7 +7,6 @@
   <resource name="Scout" type="RESOURCE"/>
   <resource name="Quote" type="RESOURCE"/>
   <resource name="Sniper" type="RESOURCE"/>
-  <resource name="Spy" type="RESOURCE"/>
   <resource name="Engineer" type="RESOURCE"/>
   <resource name="Medic" type="RESOURCE"/>
   <resource name="Demoman" type="RESOURCE"/>

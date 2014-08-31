@@ -31,8 +31,7 @@ if(instance_exists(ArenaControlPoint)) {
 } else {
     mode=0;     // Symmetrical CP
     locked=false;
-}
-    
+} 
 global.cp[cp] = id;
 
 team=-1;

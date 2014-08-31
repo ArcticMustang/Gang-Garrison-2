@@ -37,7 +37,6 @@
     global.CustomMapCollisionSprite = -1;
     
     window_set_region_scale(-1, false);
-    
     ini_open("gg2.ini");
     global.playerName = ini_read_string("Settings", "PlayerName", "Player");
     if string_count("#",global.playerName) > 0 global.playerName = "Player";
@@ -227,6 +226,8 @@
     //dkoth_sixties
     maps[16] = ini_read_real("Maps", "dkoth_sixties", 16);
     
+    maps[17] = ini_read_real("Maps", "pl_addendum", 17);
+    
     //Server respawn time calculator. Converts each second to a frame. (read: multiply by 30 :hehe:)
     if (global.Server_RespawntimeSec == 0)
     {
@@ -256,6 +257,7 @@
     ini_write_real("Maps", "koth_harvest", maps[14]);
     ini_write_real("Maps", "dkoth_atalia", maps[15]);
     ini_write_real("Maps", "dkoth_sixties", maps[16]);
+    ini_write_real("Maps", "pl_addendum", maps[17]);
 
     ini_close();
     
@@ -408,6 +410,9 @@ global.launchMap = "";
                 break;
                 case 16:
                     ds_list_add(global.map_rotation, "dkoth_sixties");
+                break;
+                case 17:
+                    ds_list_add(global.map_rotation, "pl_addendum");
                 break;
                     
             }

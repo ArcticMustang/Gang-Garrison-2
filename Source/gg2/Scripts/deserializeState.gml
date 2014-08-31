@@ -8,6 +8,11 @@ if(read_ubyte(global.tempBuffer) != ds_list_size(global.players))
     show_message("Wrong number of players while deserializing state");
 
 if(argument0 != CAPS_UPDATE) {
+            if instance_exists(PayloadCart){
+            with (PayloadCart){
+                event_user(13)
+            }
+            }
     for(i=0; i<ds_list_size(global.players); i+=1) {
         player = ds_list_find_value(global.players, i);
         with(player) {

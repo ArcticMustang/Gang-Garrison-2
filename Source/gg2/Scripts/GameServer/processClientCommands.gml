@@ -71,7 +71,18 @@ while(commandLimitRemaining > 0) {
             socket_destroy(player.socket);
             player.socket = -1;
             break;
+        case PATH_DOWNLOAD:
+            write_ubyte(player.socket,PATH_DOWNLOAD);
+            var mappointlist;
+            mappointlist = split(global.payload_points_string, ";");
+            write_ubyte(player.socket,ds_list_size(mappointlist));
             
+            for (cc=0;cc<=ds_list_size(mappointlist);cc+=1){
+            write_ubyte(player.socket,10)
+            write_string(player.socket,ds_list_find_value(mappointlist,cc)+";");
+            }
+            
+            break;
         case PLAYER_CHANGECLASS:
             var class;
             class = read_ubyte(socket);
@@ -185,6 +196,16 @@ while(commandLimitRemaining > 0) {
             
             setChatBubble(player, bubbleImage);
             break;
+        
+        case CHANGE_DISGUISE:
+            var disguise;
+            disguise = read_ubyte(socket);
+            write_ubyte(global.sendBuffer,CHANGE_DISGUISE);
+            write_ubyte(global.sendBuffer, playerId);
+            write_ubyte(global.sendBuffer, disguise);
+                        
+            setDisguise(player, disguise);
+            break;      
             
         case BUILD_SENTRY:
             if(player.object != -1)

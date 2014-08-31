@@ -3,6 +3,7 @@
   <resource name="CTFHUD" type="RESOURCE"/>
   <resource name="InvasionHUD" type="RESOURCE"/>
   <resource name="ControlPointHUD" type="RESOURCE"/>
+  <resource name="PayloadHUD" type="RESOURCE"/>
   <resource name="FauxCPHUD" type="RESOURCE"/>
   <resource name="ArenaHUD" type="RESOURCE"/>
   <resource name="KothHUD" type="RESOURCE"/>

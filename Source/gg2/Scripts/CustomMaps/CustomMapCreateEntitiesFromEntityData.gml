@@ -1,10 +1,10 @@
 // creates game objects per the list in the entity data
 
 // argument0: entity data
-
+global.payload_path = ds_list_create();
 {
 
-var currentPos, entityType, entityX, entityY, wordLength, DIVIDER, DIVREPLACEMENT;
+var currentPos, entityType, entityX, entityY, wordLength, DIVIDER, DIVREPLACEMENT, nodeNumber, movementStatus;
 DIVIDER = chr(10);
 DIVREPLACEMENT = " ";
 
@@ -29,6 +29,20 @@ while(string_pos(DIVIDER, argument0) != 0) { // continue until there are no more
   argument0 = string_replace(argument0, DIVIDER, DIVREPLACEMENT);
   currentPos += wordLength + string_length(DIVREPLACEMENT);
   
+  if entityType = "PayloadNode"{
+ 
+    // grab the number of the node. This is probably redundant, but I keep it in just in case because I don't know exactly how loading works, to be honest.
+    wordLength = string_pos(DIVIDER, argument0) - currentPos;
+    nodeNumber = real(string_copy(argument0, currentPos, wordLength));
+    argument0 = string_replace(argument0, DIVIDER, DIVREPLACEMENT);
+    currentPos += wordLength + string_length(DIVREPLACEMENT);
+    
+    // grab the movement status for the node
+    wordLength = string_pos(DIVIDER, argument0) - currentPos;
+    movementStatus = real(string_copy(argument0, currentPos, wordLength));
+    argument0 = string_replace(argument0, DIVIDER, DIVREPLACEMENT);
+    currentPos += wordLength + string_length(DIVREPLACEMENT);
+  }
   // This is where the magic happens:
   // Based on what type of entity we just parsed, we create
   // the corresponding game object.  If the particular entity
@@ -45,6 +59,7 @@ while(string_pos(DIVIDER, argument0) != 0) { // continue until there are no more
 /*REMINDER: Get Leiche or Cspot to add 8 new spawn entities to Garrison Builder or 
  *get Garrison Builder source to try out for self. In GB, aesthetics are as follows:
  * 0=Runner, 1=Firebug, 2=Rocketman, 3=Overweight, 4=Detonator*/
+ //OOh, sounds kinky. I could do it with the code up there, if it works in the end.
     case "redspawn":
       instance_create(entityX, entityY, SpawnPointRed);
     break;
@@ -202,6 +217,24 @@ while(string_pos(DIVIDER, argument0) != 0) { // continue until there are no more
       instance_create(entityX, entityY, DropdownPlatform);
     break;
     
+    case "PayloadNode":
+        // create a payload node and tell it what its prime directive is.
+        var node;
+        node=instance_create(entityX, entityY, PayloadNode);
+        
+        ds_list_insert(global.payload_path,nodeNumber,node);
+        
+        with node{
+            nodeNum = nodeNumber;
+            moveStatus = movementStatus;
+        }
+        
+        //Actually I accidentally made them rebel and kill all humans, so this is a workaround to prevent that.
+    break;
+
+if ds_list_empty(global.payload_path){
+ds_list_destroy(global.payload_path)
+}    
     /* 
     
     Code from this point on is for experimental objects that aren't added yet, like teleports and map logics
@@ -459,3 +492,4 @@ while(string_pos(DIVIDER, argument0) != 0) { // continue until there are no more
   }
 }
 }
+

@@ -13,4 +13,10 @@
   <resource name="Updater" type="GROUP"/>
   <resource name="DevMessagesCheckerS" type="RESOURCE"/>
   <resource name="pointS" type="RESOURCE"/>
+  <resource name="MaskS" type="RESOURCE"/>
+  <resource name="Payload" type="GROUP"/>
+  <resource name="DisguiseOverlayS" type="RESOURCE"/>
+  <resource name="Transparent1" type="RESOURCE"/>
+  <resource name="Transparent2" type="RESOURCE"/>
+  <resource name="WeaponGibS" type="RESOURCE"/>
 </resources>

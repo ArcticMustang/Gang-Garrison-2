@@ -147,6 +147,12 @@ instance_create(0,0,DirtbowlO);</creationCode>
   </views>
   <instances>
     <instance>
+      <object>PayloadCart</object>
+      <position x="750" y="948"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
       <object>RedTeamGate</object>
       <position x="660" y="906"/>
       <creationCode/>

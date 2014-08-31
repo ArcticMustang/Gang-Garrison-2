@@ -13,7 +13,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">event_user(0);</argument>
+        <argument kind="STRING">pathPosition = -1;
+event_user(0);
+</argument>
       </arguments>
     </action>
   </actions>

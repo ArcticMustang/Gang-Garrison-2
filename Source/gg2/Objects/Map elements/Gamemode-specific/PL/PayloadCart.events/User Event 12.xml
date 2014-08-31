@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="22">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">var status;
+
+
+write_ushort(global.serializeBuffer,distanceFromPoint/2);
+write_ubyte(global.serializeBuffer,direction/2)
+write_ubyte(global.serializeBuffer,targetangle/2)
+write_byte(global.serializeBuffer,speed);
+
+status = 0;
+
+if (blocked) status |= $01;
+if (backTimer) status |= $02;
+if (canMakeSound) status |= $08;
+if (goingBack) = -1 status |=$20;
+/*
+write_ubyte(global.serializeBuffer,blocked);
+write_ubyte(global.serializeBuffer,backTimer);
+write_ubyte(global.serializeBuffer,startedPushing);
+write_ubyte(global.serializeBuffer,canMakeSound);
+write_byte(global.serializeBuffer,goingBack);
+*/
+write_ubyte(global.serializeBuffer,status);
+write_ubyte(global.serializeBuffer,onPoint);
+write_ubyte(global.serializeBuffer,nextPoint);
+write_ubyte(global.serializeBuffer,movStatus);
+write_ubyte(global.serializeBuffer,max((alarm[0])/6,0));
+
+
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

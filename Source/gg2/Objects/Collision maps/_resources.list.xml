@@ -2,6 +2,7 @@
 <resources>
   <resource name="CollisionMapO" type="RESOURCE"/>
   <resource name="TwodFortTwoRemixO" type="RESOURCE"/>
+  <resource name="AddendumO" type="RESOURCE"/>
   <resource name="TruefortO" type="RESOURCE"/>
   <resource name="ConflictO" type="RESOURCE"/>
   <resource name="AvantiO" type="RESOURCE"/>

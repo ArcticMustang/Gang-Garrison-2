@@ -17,7 +17,7 @@
 temp = read_byte(global.deserializeBuffer);
 cappingTeam = read_byte(global.deserializeBuffer);
 capping = read_ushort(global.deserializeBuffer);
-if team != temp {
+if team != temp &amp;&amp; mode != 5 {
     pointCapture(cp);
     team = temp;
 }

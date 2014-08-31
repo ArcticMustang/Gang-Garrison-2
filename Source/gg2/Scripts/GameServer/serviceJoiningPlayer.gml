@@ -79,6 +79,7 @@ case STATE_EXPECT_PASSWORD:
 
 case STATE_CLIENT_AUTHENTICATED:
     write_ubyte(socket, HELLO);
+    
     write_ubyte(socket, string_length(global.serverName));
     write_string(socket, global.serverName);
     write_ubyte(socket, string_length(global.currentMap));
@@ -89,6 +90,7 @@ case STATE_CLIENT_AUTHENTICATED:
     write_ubyte(socket, global.serverPluginsRequired);
     write_ubyte(socket, string_length(GameServer.pluginList));
     write_string(socket, GameServer.pluginList);
+    
     
     advertisedMap = global.currentMap;
     advertisedMapMd5 = global.currentMapMD5;

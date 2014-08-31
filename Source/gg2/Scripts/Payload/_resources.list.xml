@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="getDistanceBetweenPoints" type="RESOURCE"/>
+  <resource name="getPathtypeFromString" type="RESOURCE"/>
+  <resource name="getNodeStatus" type="RESOURCE"/>
+  <resource name="cartCapture" type="RESOURCE"/>
+</resources>

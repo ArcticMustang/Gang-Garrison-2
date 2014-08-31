@@ -47,6 +47,9 @@ case "ctf_oldfort":
     return Oldfort;
 case "gg_debug":
     return DebugRoom;
+/*case "pl_addendum":
+    return Addendum;*/
 default:
     return false;
 }
+

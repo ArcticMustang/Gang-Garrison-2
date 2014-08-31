@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-  <resource name="Medigun" type="RESOURCE"/>
   <resource name="Rifle" type="RESOURCE"/>
   <resource name="Minegun" type="RESOURCE"/>
   <resource name="Minigun" type="RESOURCE"/>
@@ -9,6 +8,4 @@
   <resource name="Shotgun" type="RESOURCE"/>
   <resource name="Rocketlauncher" type="RESOURCE"/>
   <resource name="Blade" type="RESOURCE"/>
-  <resource name="Revolver" type="RESOURCE"/>
-  <resource name="SentryTurret" type="RESOURCE"/>
 </resources>

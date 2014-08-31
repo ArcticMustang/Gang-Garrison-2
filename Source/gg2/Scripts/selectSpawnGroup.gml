@@ -3,8 +3,22 @@
 
     var team, group;
     team = argument0;
-    
-    if (instance_exists(ControlPointHUD)) // Gamemode is CP
+    if (instance_exists(PayloadHUD)) // Gamemode is PL
+    {
+        var myTeamCP, i;
+        myTeamCP = 0;
+        for (i=1; i<= global.totalControlPoints; i+=1)
+        {
+            if (global.cp[i].team == team)
+                myTeamCP += 1;
+        }
+            if (team == TEAM_RED)
+                group = myTeamCP;
+            else if (team == TEAM_BLUE)
+                group = myTeamCP - 1;
+
+        
+    }else if (instance_exists(ControlPointHUD)) // Gamemode is CP
     {
         var myTeamCP, i;
         myTeamCP = 0;

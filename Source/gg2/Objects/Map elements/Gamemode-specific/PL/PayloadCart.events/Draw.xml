@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">image_xscale = ((lengthdir_x(1,speed)&gt;0)*2)-1
+image_yscale = ((lengthdir_x(1,speed)&gt;0)*2)-1
+draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,currentangle,c_white,1);
+
+
+with Character{
+if collision_circle(other.x,other.y,other.range,id,0,0)
+&amp;&amp; !collision_line(other.x+lengthdir_x(20*other.goingBack,other.direction+90),other.y+lengthdir_y(20*other.goingBack,other.direction+90),x,y,Obstacle,1,0)
+&amp;&amp; !collision_line(other.x+lengthdir_x(20*other.goingBack,other.direction+90),other.y+lengthdir_y(20*other.goingBack,other.direction+90),x,y,PlayerWall,1,0)
+&amp;&amp; !collision_line(other.x+lengthdir_x(20*other.goingBack,other.direction+90),other.y+lengthdir_y(20*other.goingBack,other.direction+90),x,y,TeamGate,1,0)
+&amp;&amp; !ubered &amp;&amp; !cloak &amp;&amp; (team == TEAM_RED || (disguised &amp;&amp; disguiseTeam == TEAM_RED)){
+
+if disguiseClass=CLASS_QUOTE &amp;&amp; disguised=true{
+    quote_y_offset=12;
+    }else{
+    quote_y_offset=0;
+    }
+        var color;
+            color = c_red;
+            
+        draw_set_alpha(0.3);
+        draw_line_width_color(other.x+lengthdir_x(32,other.currentangle+130),other.y+lengthdir_y(32,other.currentangle+130),x,y+quote_y_offset, 5, color, color);
+        
+}
+
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

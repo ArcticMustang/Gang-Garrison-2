@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="11">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if !instance_exists(CaptureZone){
+  mode=5;     // Payload, if the mode is attack/defense and there is no capture zones, then it's probably payload.
+  locked=false;
+  team = TEAM_BLUE;
+}
+
+//Define control points relative to the path of the cart
+if instance_exists(PayloadCart){
+var node;
+node = instance_nearest(x,y,PayloadNode)
+pathPosition = node.nodeNum;
+node.isAPoint = true;
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

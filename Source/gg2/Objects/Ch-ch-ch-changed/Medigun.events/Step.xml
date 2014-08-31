@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(!healedThisStep and instance_exists(healTarget))
+{
+    if(healTarget.object != -1)
+        healTarget.object.healer = -1;
+            
+    healTarget = noone;
+}
+
+healedThisStep = false;
+</argument>
+      </arguments>
+    </action>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if instance_exists(healTarget) &amp;&amp; healTarget!=-1{
+if instance_exists(healTarget.object) &amp;&amp; healTarget.object !=-1{
+
+ if (healTarget.team!=ownerPlayer.team &amp;&amp; (healTarget.object.disguised==false || healTarget.object.disguiseTeam!=ownerPlayer.team || healTarget.object.cloakAlpha!=1)){
+ healTarget.object.healer=-1
+ healTarget=noone
+ }
+}
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

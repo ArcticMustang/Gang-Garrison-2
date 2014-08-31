@@ -42,12 +42,14 @@ do {
         switch(read_ubyte(global.serverSocket)) {
         case HELLO:
             gotServerHello = true;
+            
             global.joinedServerName = receivestring(global.serverSocket, 1);
             downloadMapName = receivestring(global.serverSocket, 1);
             advertisedMapMd5 = receivestring(global.serverSocket, 1);
             receiveCompleteMessage(global.serverSocket, 1, global.tempBuffer);
             pluginsRequired = read_ubyte(global.tempBuffer);
             plugins = receivestring(global.serverSocket, 1);
+            
             if(string_pos("/", downloadMapName) != 0 or string_pos("\", downloadMapName) != 0)
             {
                 show_message("Server sent illegal map name: "+downloadMapName);
@@ -172,6 +174,7 @@ do {
                 write_ubyte(global.serverSocket, global.queueJumping);
             }
             socket_send(global.serverSocket);
+    
             break;
             
         case JOIN_UPDATE:
@@ -194,8 +197,29 @@ do {
                   
         case INPUTSTATE:
             deserializeState(INPUTSTATE);
-            break;             
+            break; 
+                        
+        /*case PATH_DOWNLOAD:
+            receiveCompleteMessage(global.serverSocket,1,global.serverSocket);
+                var pathpointsnumber, cc;
+                
+                pathpointsnumber = read_ubyte(global.serverSocket);
+                
+                for (cc=0;cc<pathpointsnumber;cc+=1){
+                
+                    global.payload_points_string += receivestring(global.serverSocket,1);
+                
+                }
+                if !instance_exists(PayloadCart) instance_create(0,0,PayloadCart);
+                with ControlPoint event_user(0);
         
+                instance_create(0,0,PayloadHUD);
+
+                with PayloadHUD event_user(0);
+                show_message(global.payload_points_string);
+            
+            break;  
+            */
         case PLAYER_JOIN:
             player = instance_create(0,0,Player);
             player.name = receivestring(global.serverSocket, 1);
@@ -292,6 +316,9 @@ do {
             receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
             player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
             player.name = receivestring(global.serverSocket, 1);
+            if object_exists(player.object){
+            object.tempName=player.name
+            }
             if player=global.myself {
                 global.playerName=player.name
             }
@@ -308,6 +335,12 @@ do {
             receiveCompleteMessage(global.serverSocket,2,global.tempBuffer);
             player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
             setChatBubble(player, read_ubyte(global.tempBuffer));
+            break;
+        
+        case CHANGE_DISGUISE:
+            receiveCompleteMessage(global.serverSocket,2,0);
+            player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
+            setDisguise(player, read_ubyte(global.tempBuffer));
             break;
              
         case BUILD_SENTRY:

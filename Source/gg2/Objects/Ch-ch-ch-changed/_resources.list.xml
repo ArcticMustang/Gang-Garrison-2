@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="Medigun" type="RESOURCE"/>
+  <resource name="Character" type="RESOURCE"/>
+  <resource name="Spy" type="RESOURCE"/>
+  <resource name="DisguiseOverlay" type="RESOURCE"/>
+  <resource name="Weapon" type="RESOURCE"/>
+  <resource name="Revolver" type="RESOURCE"/>
+  <resource name="PlayerControl" type="RESOURCE"/>
+  <resource name="BubbleMenuZ" type="RESOURCE"/>
+  <resource name="BubbleMenuX" type="RESOURCE"/>
+  <resource name="BubbleMenuC" type="RESOURCE"/>
+  <resource name="HealingHud" type="RESOURCE"/>
+  <resource name="WeaponGib" type="RESOURCE"/>
+  <resource name="SentryTurret" type="RESOURCE"/>
+</resources>

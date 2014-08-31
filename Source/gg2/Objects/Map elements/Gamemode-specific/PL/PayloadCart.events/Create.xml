@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">numPushers = 0;
+movementPath = global.payload_path;
+pathpos = 0;
+distanceTraveled = 0;
+minpoint = 0;
+blocked = false;
+numBlockers = 0;
+image_speed = 0;
+blastRadius = 400;
+range = 75;
+x = getNodeStatus(0,'x');
+y = getNodeStatus(0,'y');
+targetangle = 0;
+currentangle = 0;
+scaler = 0.3;
+distanceFromPoint = 0;
+currentPoint = 0;
+
+movStatus = 0;
+
+onPoint = 0;
+nextPoint = 1;
+myselfOnPoint = false;
+startedPushing = true;
+backTimer = true;
+goingBack = 1;
+timeSecondsToBack = 6;
+canMakeSound = false;
+
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -61,6 +61,19 @@ else if(instance_exists(KothRedControlPoint) and instance_exists(KothBlueControl
         event_user(0);
     instance_create(0,0,DKothHUD);
 }
+else if instance_exists(ControlPoint) and (!instance_exists(KothRedControlPoint) and !instance_exists(ArenaControlPoint)) and instance_exists(PayloadNode)
+{
+
+        
+        if !instance_exists(PayloadCart) instance_create(getNodeStatus(0,'x'),getNodeStatus(0,'y'),PayloadCart);
+        if !instance_exists(PayloadHUD) instance_create(0,0,PayloadHUD);
+        
+        with ControlPoint event_user(1);
+
+        with PayloadHUD event_user(0);
+        
+        with PayloadNode event_user(0);
+}
 else if instance_exists(ControlPoint)
 {
     with(ControlPoint)

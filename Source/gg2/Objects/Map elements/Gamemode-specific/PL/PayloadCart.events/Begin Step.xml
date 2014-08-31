@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="1">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">/*Make some sparks when going backwards.
+if goingBack = -1 &amp;&amp; random(8/global.delta_factor)&lt;5{
+var spark;
+
+spark = instance_create(x+lengthdir_x(random_range(-20,24),currentangle-90),y-lengthdir_y(random(4),currentangle-90),Spark);
+    
+    with spark{
+        speed = random(5*global.delta_factor)+2*(global.delta_factor);
+        direction = other.currentangle+random_range(20,90);
+    }
+}*/
+
+movStatus = getNodeStatus(onPoint,'moveStatus')
+//This is the meat of the cart code.
+numPushers = 0;
+numBlockers = 0;
+//if speed !=0 direction=point_direction(path_get_point_x(movementPath,lastpoint),path_get_point_y(movementPath,lastpoint),path_get_point_x(movementPath,nextpoint),path_get_point_y(movementPath,nextpoint));
+if movStatus == 0 {
+if speed != 0 targetangle=point_direction(x,y,getNodeStatus(min(ds_list_size(movementPath)-1,nextPoint),'x'),getNodeStatus(min(ds_list_size(movementPath)-1,nextPoint),'y'))+180*(speed&lt;0);//
+}else targetangle = 0;
+
+//Character checking, reds push while blues block. The box is 20 pixels above the cart--about centered.
+with Character{
+    if collision_circle(other.x,other.y,other.range,id,0,0)
+            &amp;&amp; !collision_line(other.x+lengthdir_x(20*other.image_yscale,other.targetangle+90),other.y+lengthdir_y(20*other.image_yscale,other.targetangle+90),x,y,Obstacle,1,0)
+            &amp;&amp; !collision_line(other.x+lengthdir_x(20*other.image_yscale,other.targetangle+90),other.y+lengthdir_y(20*other.image_yscale,other.targetangle+90),x,y,PlayerWall,1,0)
+            &amp;&amp; !collision_line(other.x+lengthdir_x(20*other.image_yscale,other.targetangle+90),other.y+lengthdir_y(20*other.image_yscale,other.targetangle+90),x,y,TeamGate,1,0)
+            &amp;&amp; !ubered &amp;&amp; !cloak &amp;&amp; !(disguised &amp;&amp; disguiseTeam!=player.team){
+        if(player == global.myself) {
+            myselfOnPoint = true;
+                other.soundx = x;
+                other.soundy = y;
+        }else{
+                other.soundx = other.x;
+                other.soundy = other.y;
+        }
+
+        onCart = true;
+        
+        if player.team=TEAM_RED{
+            cappingPoint=other.id;
+            
+            with other{
+                if !startedPushing &amp;&amp; !blocked{
+                    if !sound_isplaying(CPBeginCapSnd) playsound(soundx, soundy, CPBeginCapSnd);
+                    alarm[2]=30/global.delta_factor;
+                    startedPushing = false;
+                }
+            if goingBack =-1{
+                nextPoint=min(ds_list_size(movementPath)-1,nextPoint+1);
+            }
+                startedPushing=true
+                goingBack = 1;
+                numPushers+=1
+
+                backTimer = false;
+                alarm[0]= -1;
+            }
+            
+            //Heal the RED character
+            healBy=0.2 * calculateHealingFactor(timeUnscathed)
+            hp=min(hp+(healBy * global.delta_factor),maxHp);
+
+}
+else if other.blocked == false{
+    with other{
+        if !sound_isplaying(CPDefendedSnd) playsound(soundx, soundy, CPDefendedSnd);
+        numBlockers+=1;
+        numPushers = 0;
+    }
+}else{
+    other.numBlockers+=1;
+    other.numPushers = 0;
+}
+}else onCart = false;
+
+}
+//
+if numPushers == 0{
+    startedPushing=false;
+    sprite_index = LeetleCartS;
+}else{
+    sprite_index = LeetleCartMovingS;
+}
+
+if numBlockers == 0{
+    blocked = false;
+}else{
+    blocked = true;
+    sprite_index = LeetleCartS;
+}
+
+
+//Animation and path movement speed, based on how many chumps are pushing the cart (Didnt want too much variation, so I settled on 2) 
+switch movStatus{
+case 1:
+if speed&lt;10 speed+=0.8;
+targetangle = 0;
+minpoint=onPoint+1;
+image_speed = 0;
+break;
+case 0:
+    if goingBack  &lt; 0 &amp;&amp; numPushers&gt;0 speed = 0;
+    if goingBack &gt; 0 speed = min((0.75*(numPushers&gt;0)+0.25*numPushers)-(0.75*(numPushers&gt;0)+0.25*numPushers)*blocked,2.55-2.55*blocked) * global.delta_factor; //This is a do-all speed code. It takes the number of people pushing and sets the cart's speed to that, up to a maximum of 2.55, or the heavy's gunning speed.
+    image_speed = (speed/10) * global.delta_factor;
+break;
+}
+//Useful code given to me by Ratermat. Props to him--hes a bro. Takes the angle of the next turn and turns the cart slowly to that angle.
+currentangle = (currentangle + ((((((targetangle - currentangle) mod 360) + 540) mod 360) - 180)*scaler));
+
+//Timer for moving backwards. Adds half a second to the idle timer for every player.
+if numPushers = 0 &amp;&amp; backTimer == false{
+alarm[1] = ds_list_size(global.players)*15 / global.delta_factor;
+backTimer = true;
+}
+
+
+//Ends the game
+if global.winners!=-1{
+if global.winners = TEAM_RED alarm[11]=120/global.delta_factor;
+}
+
+if onPoint&lt;ds_list_size(movementPath)-1{
+  if movStatus = 0 direction=point_direction(x,y,getNodeStatus(nextPoint,'x'),getNodeStatus(nextPoint,'y'))+180*(speed&lt;0); 
+  else {
+  direction=point_direction(x,y,getNodeStatus(nextPoint,'x'),getNodeStatus(nextPoint,'y'))
+  targetangle=0;
+  }
+}else direction=0;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

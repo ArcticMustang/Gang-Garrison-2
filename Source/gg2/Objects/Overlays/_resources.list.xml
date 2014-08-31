@@ -18,5 +18,4 @@
   <resource name="MedicRadar" type="RESOURCE"/>
   <resource name="WinBanner" type="RESOURCE"/>
   <resource name="HealedHud" type="RESOURCE"/>
-  <resource name="HealingHud" type="RESOURCE"/>
 </resources>

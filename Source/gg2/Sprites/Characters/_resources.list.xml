@@ -4,6 +4,7 @@
   <resource name="Special" type="GROUP"/>
   <resource name="Humiliation" type="GROUP"/>
   <resource name="QuoteRedS" type="RESOURCE"/>
+  <resource name="SpyQuoteS" type="RESOURCE"/>
   <resource name="ScoutRedS" type="RESOURCE"/>
   <resource name="ScoutRedIntelS" type="RESOURCE"/>
   <resource name="ScoutBlueIntelS" type="RESOURCE"/>
@@ -135,4 +136,5 @@
   <resource name="SniperBlueS" type="RESOURCE"/>
   <resource name="SniperCrouchBlueS" type="RESOURCE"/>
   <resource name="CurlyBlueS" type="RESOURCE"/>
+  <resource name="SpyCurlyS" type="RESOURCE"/>
 </resources>

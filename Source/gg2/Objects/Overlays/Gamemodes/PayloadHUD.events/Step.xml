@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if (timer &gt; 0)
+    timer -= 1 * global.delta_factor;
+
+if (global.run_virtual_ticks)
+{
+    if (global.setupTimer &gt; 0)
+        global.setupTimer -= 1;
+    if (global.setupTimer == 90 or global.setupTimer == 120
+        or global.setupTimer == 150 or global.setupTimer == 180)
+        sound_play(CountDown1Snd);
+    else if (global.setupTimer == 60)
+        sound_play(CountDown2Snd);
+    else if (global.setupTimer == 30)
+    {
+        timer = timeLimit;
+        sound_play(SirenSnd);
+    }
+}
+
+
+//overtime?
+overtime = 0;
+if (timer == 0)
+{
+
+        if PayloadCart.goingBack != -1 overtime = 1;
+
+}
+
+//check for winner, when red caps all they win, if the timer... etc its just a/d with a cart you stupid fuck
+
+if (global.cp[global.totalControlPoints].team == TEAM_RED)
+    {
+        global.winners = TEAM_RED;
+    }
+    else if (timer == 0 and overtime == 0)
+    {
+        global.winners = TEAM_BLUE;
+    }
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

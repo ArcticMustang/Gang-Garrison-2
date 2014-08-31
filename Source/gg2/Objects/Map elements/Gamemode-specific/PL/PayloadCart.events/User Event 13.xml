@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="23">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">receiveCompleteMessage(global.serverSocket,10,global.deserializeBuffer);
+var status;
+
+distanceFromPoint = read_ushort(global.deserializeBuffer)*2;
+direction = read_ubyte(global.deserializeBuffer)*2;
+targetangle = read_ubyte(global.deserializeBuffer)*2;
+speed = read_byte(global.deserializeBuffer);
+
+status = read_ubyte(global.deserializeBuffer);
+        blocked = (status &amp; $01);
+        backTimer = (status &amp; $02);
+        canMakeSound = (status &amp; $08);
+        if (status &amp; $20) goingBack = -1;
+        else goingBack = 1;
+
+/*blocked = read_ubyte(global.deserializeBuffer);
+backTimer = read_ubyte(global.deserializeBuffer);
+startedPushing = read_ubyte(global.deserializeBuffer);
+canMakeSound = read_ubyte(global.deserializeBuffer);
+goingBack = read_byte(global.deserializeBuffer);
+*/
+onPoint = read_ubyte(global.deserializeBuffer);
+nextPoint = read_ubyte(global.deserializeBuffer);
+movStatus = read_ubyte(global.deserializeBuffer);
+alarm[0] = read_ubyte(global.deserializeBuffer)*6;
+
+x=ds_list_find_value(movementPath,onPoint).x+lengthdir_x(distanceFromPoint,direction);
+y=ds_list_find_value(movementPath,onPoint).y+lengthdir_y(distanceFromPoint,direction);
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

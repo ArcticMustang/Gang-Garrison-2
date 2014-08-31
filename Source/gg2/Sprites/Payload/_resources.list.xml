@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="pl_pointS" type="RESOURCE"/>
+  <resource name="pl_moveRightS" type="RESOURCE"/>
+  <resource name="pl_moveLeftS" type="RESOURCE"/>
+  <resource name="LeetleCartS" type="RESOURCE"/>
+  <resource name="LeetleCartMovingS" type="RESOURCE"/>
+  <resource name="SparkS" type="RESOURCE"/>
+  <resource name="PuffCloudS" type="RESOURCE"/>
+</resources>
