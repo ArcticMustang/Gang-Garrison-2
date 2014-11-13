@@ -2,6 +2,7 @@
 <resources>
   <resource name="RevolverFS" type="RESOURCE"/>
   <resource name="RocketlauncherFS" type="RESOURCE"/>
+  <resource name="BlackBoxFS" type="RESOURCE"/>
   <resource name="MinigunFS" type="RESOURCE"/>
   <resource name="RifleFS" type="RESOURCE"/>
   <resource name="MinegunFS" type="RESOURCE"/>

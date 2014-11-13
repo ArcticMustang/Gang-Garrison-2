@@ -162,10 +162,10 @@
     demonOffset = 0;
     demonDir = 0.5;
     demonFrame = 0;
-
+    
     // Let's spawn our weapon
     global.paramOwner = id;
-    currentWeapon = instance_create(x,y,weapons[0]);
+    currentWeapon = instance_create(x,y,validiateWeapon(player, player.equipped));
     global.paramOwner = noone;
 
     // 'BH' reward - *B*obble *H*ead - not available for quote

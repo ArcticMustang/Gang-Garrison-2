@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">    if(global.updateType == FULL_UPDATE) {
-        receiveCompleteMessage(global.serverSocket,13,global.deserializeBuffer);
+        receiveCompleteMessage(global.serverSocket,15,global.deserializeBuffer);
         stats[KILLS] = read_ubyte(global.deserializeBuffer);
         stats[DEATHS] = read_ubyte(global.deserializeBuffer);
         stats[CAPS] = read_ubyte(global.deserializeBuffer);
@@ -29,6 +29,7 @@
         queueJump = read_ubyte(global.deserializeBuffer);
         parseRewards(receivestring(global.serverSocket, 2), rewards);
         parseBadges(rewards, badges);
+        equipped = read_ushort(global.deserializeBuffer);
     }
  
     var charObj, subobjects;

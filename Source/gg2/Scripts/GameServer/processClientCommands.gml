@@ -172,7 +172,43 @@ while(commandLimitRemaining > 0) {
                 }
             }
             break;                   
-            
+        case PLAYER_CHANGEWEAPON:
+            player.equipped = read_ubyte(socket);
+            if(getCharacterObject(player.team, player.class) != -1)
+            {
+                if(player.object != -1)
+                {
+                    with(player.object)
+                    {
+                        if (collision_point(x,y,SpawnRoom,0,0) < 0)
+                        {
+                            if (!instance_exists(lastDamageDealer) || lastDamageDealer == player)
+                            {
+                                sendEventPlayerDeath(player, player, noone, DAMAGE_SOURCE_BID_FAREWELL);
+                                doEventPlayerDeath(player, player, noone, DAMAGE_SOURCE_BID_FAREWELL);
+                            }
+                            else
+                            {
+                                var assistant;
+                                assistant = secondToLastDamageDealer;
+                                if (lastDamageDealer.object)
+                                    if (lastDamageDealer.object.healer)
+                                        assistant = lastDamageDealer.object.healer;
+                                sendEventPlayerDeath(player, lastDamageDealer, assistant, DAMAGE_SOURCE_FINISHED_OFF);
+                                doEventPlayerDeath(player, lastDamageDealer, assistant, DAMAGE_SOURCE_FINISHED_OFF);
+                            }
+                        }
+                        else 
+                        instance_destroy(); 
+                        
+                    }
+                }
+                else if(player.alarm[5]<=0)
+                    player.alarm[5] = 1;
+                ServerPlayerChangeclass(playerId, player.class, global.sendBuffer);
+            }
+            player.loadouts[player.class] = player.equipped;
+            break;
         case CHAT_BUBBLE:
             var bubbleImage;
             bubbleImage = read_ubyte(socket);

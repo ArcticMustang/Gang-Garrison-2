@@ -32,6 +32,7 @@
         unparsed = unparseRewards(rewards);
         write_ushort(global.serializeBuffer, string_length(unparsed));
         write_string(global.serializeBuffer, unparsed);
+        write_ushort(global.serializeBuffer, equipped);
     } 
     
     subobjects=0;

@@ -10,6 +10,7 @@
   <resource name="ScattergunS" type="RESOURCE"/>
   <resource name="ShotgunS" type="RESOURCE"/>
   <resource name="RocketlauncherS" type="RESOURCE"/>
+  <resource name="BlackBoxS" type="RESOURCE"/>
   <resource name="RifleS" type="RESOURCE"/>
   <resource name="RevolverS" type="RESOURCE"/>
   <resource name="BladeS" type="RESOURCE"/>
