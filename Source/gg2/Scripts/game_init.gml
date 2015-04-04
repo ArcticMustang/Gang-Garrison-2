@@ -69,6 +69,10 @@
     global.killLogPos = ini_read_real("Settings", "Kill Log Position", 0);
     global.kothHudPos = ini_read_real("Settings", "KoTH HUD Position", 0);
     global.consoleMode = ini_read_real("Settings", "Console Mode", CONSOLE_DISABLED);
+    global.timerPos=ini_read_real("Settings","Timer Position", 0)
+    global.killLogPos=ini_read_real("Settings","Kill Log Position", 0)
+    global.kothHudPos=ini_read_real("Settings","KoTH HUD Position", 0)
+    global.fadeScoreboard = ini_read_real("Settings", "Fade Scoreboard", 1);
     global.clientPassword = "";
     // for admin menu
     customMapRotationFile = ini_read_string("Server", "MapRotation", "");
@@ -153,6 +157,7 @@
     ini_write_real("Settings", "Kill Log Position", global.killLogPos);
     ini_write_real("Settings", "KoTH HUD Position", global.kothHudPos);
     ini_write_real("Settings", "Console Mode", global.consoleMode);
+    ini_write_real("Settings", "Fade Scoreboard", global.fadeScoreboard);
     ini_write_real("Settings", "ServerPluginsPrompt", global.serverPluginsPrompt);
     ini_write_real("Settings", "RestartPrompt", global.restartPrompt);
     ini_write_string("Server", "MapRotation", customMapRotationFile);
