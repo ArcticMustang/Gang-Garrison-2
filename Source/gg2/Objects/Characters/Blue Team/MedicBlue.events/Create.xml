@@ -33,7 +33,8 @@ spriteStand = MedicBlueStandS;
 spriteLeanR = MedicBlueLeanRS;
 spriteLeanL = MedicBlueLeanLS;
 spriteIntel = MedicBlueIntelS; // it's an underlay
-
+spriteRunForward = MedicBlueTailS;
+spriteRunBackward = MedicBlueTailBackS;
 </argument>
       </arguments>
     </action>

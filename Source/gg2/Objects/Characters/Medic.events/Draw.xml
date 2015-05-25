@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="604" library="1">
+      <!--action name: Inherited-->
+      <kind>NORMAL</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>false</canApplyTo>
+      <actionType>FUNCTION</actionType>
+      <functionName>action_inherited</functionName>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments/>
+    </action>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">var xr, yr;
+xr = round(x);
+yr = round(y);
+if (!still and onground)
+{
+    if (hspeed != 0)
+    {
+        if (sign(hspeed * image_xscale) &gt; 0)
+            draw_sprite_ext(spriteRunForward,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
+        else
+            draw_sprite_ext(spriteRunBackward,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
+    }
+    // check for keybytes if walking into a wall
+    else
+    {
+        if (((keyState|pressedKeys) &amp; $20 and image_xscale == 1) or ((keyState|pressedKeys) &amp; $40 and image_xscale == -1))
+            draw_sprite_ext(spriteRunForward,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
+        else if (((keyState|pressedKeys) &amp; $40 and image_xscale == 1) or ((keyState|pressedKeys) &amp; $20 and image_xscale == -1))            draw_sprite_ext(spriteRunBackward,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
+    }
+}
+
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>
