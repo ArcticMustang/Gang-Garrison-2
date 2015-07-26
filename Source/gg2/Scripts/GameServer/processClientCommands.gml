@@ -108,7 +108,7 @@ while(commandLimitRemaining > 0) {
                 break;
             }
 
-            if(getCharacterObject(player.team, class) != -1)
+            if(getCharacterObject(class) != -1)
             {
                 if(player.object != -1)
                 {
@@ -174,7 +174,7 @@ while(commandLimitRemaining > 0) {
             
             if(balance != newTeam)
             {
-                if(getCharacterObject(newTeam, player.class) != -1 or newTeam==TEAM_SPECTATOR)
+                if(getCharacterObject(player.class) != -1 or newTeam==TEAM_SPECTATOR)
                 {  
                     if(player.object != -1)
                     {
