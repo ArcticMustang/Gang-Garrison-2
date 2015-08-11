@@ -14,8 +14,6 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">
-          colour1=0
-colour2=0// if displaying console in in-game menu
 if (global.consoleMode &amp;&amp; instance_exists(Console)) {
     with (Console) {
         instance_destroy();

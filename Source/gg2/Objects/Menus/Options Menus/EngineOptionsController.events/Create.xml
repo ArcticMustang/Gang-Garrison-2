@@ -114,12 +114,7 @@
     menu_addedit_boolean("Prompt for restart:", "global.restartPrompt", '
         gg2_write_ini("Settings", "RestartPrompt", argument0);
     ');
-    menu_addedit_select("Debugging console", "global.consoleMode", '
-        gg2_write_ini("Settings", "Console Mode", argument0);
-    ');
-    menu_add_option(CONSOLE_INGAME, "Show In-Game");
-    menu_add_option(CONSOLE_INMENU, "Show in In-Game Menu");
-    menu_add_option(CONSOLE_DISABLED, "Disabled");
+    
     menu_addtablink("Ingame", '
         instance_destroy();
         instance_create(x,y,OptionsController);
@@ -135,10 +130,6 @@
     menu_addtablink("Controls 2", '
         instance_destroy();
         instance_create(x,y,AdvControlsController);
-    ');
-    menu_addtablink("HUD", '
-        instance_destroy();
-        instance_create(x,y,HUDOptionsController);
     ');
     menu_addtablink("HUD", '
         instance_destroy();

@@ -159,7 +159,6 @@
     ini_write_real("Settings", "Timer Position", global.timerPos);
     ini_write_real("Settings", "Kill Log Position", global.killLogPos);
     ini_write_real("Settings", "KoTH HUD Position", global.kothHudPos);
-    ini_write_real("Settings", "Console Mode", global.consoleMode);
     ini_write_real("Settings", "Fade Scoreboard", global.fadeScoreboard);
     ini_write_real("Settings", "ServerPluginsPrompt", global.serverPluginsPrompt);
     ini_write_real("Settings", "RestartPrompt", global.restartPrompt);
@@ -466,7 +465,6 @@ global.launchMap = "";
     global.changeTeam = ini_read_real("Controls", "changeTeam", ord("N"));
     global.changeClass = ini_read_real("Controls", "changeClass", ord("M"));
     global.showScores = ini_read_real("Controls", "showScores", vk_shift);
-    global.openConsole = ini_read_real("Controls", "openConsole", ord("P"));
     ini_close();
     
     calculateMonthAndDay();
