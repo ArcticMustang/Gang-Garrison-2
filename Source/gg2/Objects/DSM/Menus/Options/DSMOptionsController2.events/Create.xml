@@ -53,7 +53,7 @@
     ')
     menu_addedit_num("Sound Volume:","global.dsmVolume",'
         DSM_write_ini("Settings","DSMVolume",argument0)
-        sound_global_volume(argument0/100)
+        faudio_set_global_volume(argument0/100)
     ',100)
     menu_addedit_num("HUD Opacity:","global.dsmHudOpacity",'
         DSM_write_ini("Cosmetic","DSMHUDOpacity",argument0)

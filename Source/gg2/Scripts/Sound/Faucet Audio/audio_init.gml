@@ -4,5 +4,5 @@ if (faudio_init() == 0)
 }
 else
 {
-    ConsolePrint(faudio_get_error());
+    console_print(faudio_get_error());
 }

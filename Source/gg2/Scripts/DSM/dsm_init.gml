@@ -64,7 +64,7 @@ ini_open("DSM.ini")
     
     global.dsmVolume=ini_read_real("Settings","DSMVolume",100)
     ini_write_real("Settings","DSMVolume",global.dsmVolume)
-    sound_global_volume(global.dsmVolume/100)
+    faudio_set_global_volume(global.dsmVolume/100)
     
     global.dsmHudOpacity=ini_read_real("Cosmetic","DSMHUDOpacity",100)
     ini_write_real("Cosmetic","DSMHUDOpacity",global.dsmHudOpacity)

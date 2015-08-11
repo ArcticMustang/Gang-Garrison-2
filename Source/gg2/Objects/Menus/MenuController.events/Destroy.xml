@@ -13,8 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">
-if (global.consoleMode &amp;&amp; instance_exists(Console)) {
+        <argument kind="STRING">if (instance_exists(Console)) {
     with (Console) {
         instance_destroy();
     }

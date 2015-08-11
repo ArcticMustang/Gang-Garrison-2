@@ -97,6 +97,7 @@ if(global.myself.object != -1)
         if(keyboard_check_pressed(global.dsmQuickX4)){
             write_ubyte(global.serverSocket, CHAT_BUBBLE)
             write_ubyte(global.serverSocket, 30)
+        }
         if(keyboard_check_pressed(global.medic))
         {
             inputCallMedic();
@@ -156,7 +157,6 @@ if(keybyte != 0
         or keyboard_check(global.down)) {
     afktimer = afktimeout;
 }
-
 </argument>
       </arguments>
     </action>
