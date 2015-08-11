@@ -54,10 +54,9 @@ if keyboard_check_pressed(global.dsmReduceEyePain){
 }
 
 //Checking for input - Mapped Keys
-if(keyboard_check_pressed(global.changeTeam))
-    inputChangeTeam();
-if(keyboard_check_pressed(global.changeClass))
-    inputChangeClass();
+if(keyboard_check_pressed(global.changeTeam)) inputChangeTeam();
+if(keyboard_check_pressed(global.changeClass)) inputChangeClass();
+if(keyboard_check_pressed(global.openConsole)) inputOpenConsole();
 
 event_user(8);
 
@@ -67,7 +66,6 @@ keybyte = 0;
 /* KeyByte flags:
     02 - down
     
-    04 - medic call
     08 - primary
     10 - secondary
     
@@ -85,12 +83,11 @@ if(global.myself.object != -1)
         if(keyboard_check(global.right)) keybyte |= $20;
         if(keyboard_check(global.jump)) keybyte |= $80;
         if(keyboard_check(global.down)) keybyte |= $02;
-        if(keyboard_check_pressed(global.medic)) keybyte |= $04;
+        if(keyboard_check(global.taunt)) keybyte |= $01;
         if(keyboard_check_pressed(global.chat1)) inputChat1();
         if(keyboard_check_pressed(global.chat2)) inputChat2();
         if(keyboard_check_pressed(global.chat3)) inputChat3();
         if(keyboard_check_pressed(global.drop)) inputDrop();
-        
         //DSM
         if keyboard_check_pressed(global.dsmSuperburst){
             write_ubyte(global.serverSocket, CHAT_BUBBLE)
@@ -99,6 +96,9 @@ if(global.myself.object != -1)
         if(keyboard_check_pressed(global.dsmQuickX4)){
             write_ubyte(global.serverSocket, CHAT_BUBBLE)
             write_ubyte(global.serverSocket, 30)
+        if(keyboard_check_pressed(global.medic))
+        {
+            inputCallMedic();
         }
         
         if(!global.myself.humiliated)
@@ -106,11 +106,8 @@ if(global.myself.object != -1)
             if(keyboard_check(global.attack)) keybyte |= $10;
             if(keyboard_check(global.special)) keybyte |= $08;
             if(keyboard_check_pressed(global.special)) inputSpecial();
-            if(keyboard_check_pressed(global.taunt))
-            {
-                keybyte |= $01;
-                inputTaunt();
-            }
+            if(keyboard_check_pressed(global.taunt)) inputTaunt();
+            
             if(mouse_check_button(mb_left))
             {
                 if(global.attack == MOUSE_LEFT) keybyte |= $10;
@@ -135,7 +132,7 @@ if(global.myself.object != -1)
         }
     }
     
-    if(global.run_virtual_ticks or keyboard_check_pressed(global.taunt))
+    if(global.run_virtual_ticks)
         ClientInputstate(global.serverSocket, keybyte);
     socket_send(global.serverSocket);
 }

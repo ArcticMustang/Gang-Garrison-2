@@ -75,6 +75,20 @@
     ds_list_destroy(crouchOverlays);
     ds_list_destroy(tauntOverlays);
     ds_list_destroy(omnomnomnomOverlays);
+    loopsoundstop(BurningSnd);
+    
+    // deallocate generators
+    faudio_kill_generator(DeathSnd1);
+    faudio_kill_generator(DeathSnd2);
+    faudio_kill_generator(JumpSnd);
+    faudio_kill_generator(CbntHealSnd);
+    faudio_kill_generator(PickupSnd);
+    faudio_kill_generator(Gibbing);
+    faudio_kill_generator(UberEndSnd);
+    faudio_kill_generator(ExplosionSnd);
+    faudio_kill_generator(CPCapturedSnd);
+    faudio_kill_generator(BurningSnd);
+    faudio_kill_generator(ShotgunShotImpactSnd);
 }
 </argument>
       </arguments>

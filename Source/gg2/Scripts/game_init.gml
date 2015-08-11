@@ -17,7 +17,6 @@
     
     var customMapRotationFile, restart;
     restart = false;
-	
     initializeDamageSources();
     
     //import wav files for music
@@ -42,7 +41,6 @@
     
     ini_open("gg2.ini");
     global.playerName = ini_read_string("Settings", "PlayerName", "Player");
-    if string_count("#",global.playerName) > 0 global.playerName = "Player";
     global.playerName = string_copy(global.playerName, 0, min(string_length(global.playerName), MAX_PLAYERNAME_LENGTH));
     global.fullscreen = ini_read_real("Settings", "Fullscreen", 0);
     global.useLobbyServer = ini_read_real("Settings", "UseLobby", 1);
@@ -64,6 +62,10 @@
     global.serverPluginsPrompt = ini_read_real("Settings", "ServerPluginsPrompt", 1);
     global.restartPrompt = ini_read_real("Settings", "RestartPrompt", 1);
     //user HUD settings
+    global.timerPos = ini_read_real("Settings", "Timer Position", 0);
+    global.killLogPos = ini_read_real("Settings", "Kill Log Position", 0);
+    global.kothHudPos = ini_read_real("Settings", "KoTH HUD Position", 0);
+    global.consoleMode = ini_read_real("Settings", "Console Mode", CONSOLE_DISABLED);
     global.timerPos=ini_read_real("Settings","Timer Position", 0)
     global.killLogPos=ini_read_real("Settings","Kill Log Position", 0)
     global.kothHudPos=ini_read_real("Settings","KoTH HUD Position", 0)
@@ -157,6 +159,7 @@
     ini_write_real("Settings", "Timer Position", global.timerPos);
     ini_write_real("Settings", "Kill Log Position", global.killLogPos);
     ini_write_real("Settings", "KoTH HUD Position", global.kothHudPos);
+    ini_write_real("Settings", "Console Mode", global.consoleMode);
     ini_write_real("Settings", "Fade Scoreboard", global.fadeScoreboard);
     ini_write_real("Settings", "ServerPluginsPrompt", global.serverPluginsPrompt);
     ini_write_real("Settings", "RestartPrompt", global.restartPrompt);
@@ -463,24 +466,41 @@ global.launchMap = "";
     global.changeTeam = ini_read_real("Controls", "changeTeam", ord("N"));
     global.changeClass = ini_read_real("Controls", "changeClass", ord("M"));
     global.showScores = ini_read_real("Controls", "showScores", vk_shift);
+    global.openConsole = ini_read_real("Controls", "openConsole", ord("P"));
     ini_close();
     
     calculateMonthAndDay();
     
     builder_init();
-	
-	character_init();
+    character_init();
 
     DSM_init()
 
     if(!directory_exists(working_directory + "\DSM_Plugins")) directory_create(working_directory + "\DSM_Plugins");    
-    loadplugins();
+        loadplugins();
+
+    character_init();
     
-    /* Windows 8 is known to crash GM when more than three (?) sounds play at once
-     * We'll store the kernel version (Win8 is 6.2, Win7 is 6.1) and check it there.
-     ***/
-    registry_set_root(1); // HKLM
-    global.NTKernelVersion = real(registry_read_string_ext("\SOFTWARE\Microsoft\Windows NT\CurrentVersion\", "CurrentVersion")); // SIC
+    _ConsoleInit();
+    //import wav files for music
+    audio_init()
+    global.MenuMusicS=ds_list_create();
+    ds_list_add(global.MenuMusicS, faudio_new_sample("Music/Elkondo - A Little Heart To Heart.ogg"));
+    ds_list_add(global.MenuMusicS, faudio_new_sample("Music/Elkondo - Intruder Alert.ogg"));
+    ds_list_add(global.MenuMusicS, faudio_new_sample("Music/Elkondo - MEDIC!.ogg"));
+    ds_list_add(global.MenuMusicS, faudio_new_sample("Music/Elkondo - Petite Chou-Fleur.ogg"));
+    ds_list_add(global.MenuMusicS, faudio_new_sample("Music/Elkondo - Right Behind You.ogg"));
+    ds_list_add(global.MenuMusicS, faudio_new_sample("Music/Father of Syn - Gang Garrison II.ogg"));
+    ds_list_add(global.MenuMusicS, faudio_new_sample("Music/Scoot - Rocket Jump Waltz.ogg"));
+    
+    global.IngameMusicS=faudio_new_sample("Music/ingamemusic.ogg");
+    
+    global.FaucetMusicS=faudio_new_sample("Music/faucetmusic.ogg");
+    global.FaucetMusic=faudio_new_generator(global.FaucetMusicS);
+    global.VictoryMusic = faudio_new_sample("Music/Victory.ogg");
+    global.FailureMusic = faudio_new_sample("Music/Failure.ogg");
+    if(global.FaucetMusic != -1)
+        faudio_volume_generator(global.FaucetMusic, 0.8);
     
     globalvar previous_window_x, previous_window_y, previous_window_w;
     previous_window_x = window_get_x();

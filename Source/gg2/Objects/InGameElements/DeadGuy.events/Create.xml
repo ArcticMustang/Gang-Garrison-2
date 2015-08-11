@@ -22,7 +22,11 @@ if global.dsmBodyFade==0{
     alarm[0] = 50/global.delta_factor;
 }
 hitground = false;
+
 hasMoney = false;
+
+ImpactSnd = faudio_new_generator(ImpactSndS);
+
 </argument>
       </arguments>
     </action>

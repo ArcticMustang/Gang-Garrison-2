@@ -26,6 +26,7 @@
   <resource name="Menus" type="GROUP"/>
   <resource name="Holidays" type="GROUP"/>
   <resource name="Macro" type="GROUP"/>
+  <resource name="Console" type="GROUP"/>
   <resource name="Bytes" type="GROUP"/>
   <resource name="Rewards" type="GROUP"/>
   <resource name="Plugins" type="GROUP"/>
@@ -58,5 +59,6 @@
   <resource name="draw_pinched_blackrect" type="RESOURCE"/>
   <resource name="createShot" type="RESOURCE"/>
   <resource name="classname" type="RESOURCE"/>
+  <resource name="sanitiseNewlines" type="RESOURCE"/>
   <resource name="Faucet HTTP" type="GROUP"/>
 </resources>

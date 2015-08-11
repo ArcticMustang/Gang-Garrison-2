@@ -22,19 +22,13 @@ if (mode == 1 and global.run_virtual_ticks)
         global.setupTimer -= 1;
     if (global.setupTimer == 90 or global.setupTimer == 120
         or global.setupTimer == 150 or global.setupTimer == 180) and global.dsmCountdownTheme==0
-        sound_play(CountDown1Snd);
+        faudio_fire_generator(CountDown1Snd);
     else if (global.setupTimer == 60) and global.dsmCountdownTheme==0
-        sound_play(CountDown2Snd);
+        faudio_fire_generator(CountDown2Snd);
     else if (global.setupTimer == 30)
     {
         timer = timeLimit;
-        sound_play(SirenSnd);
-    }
-}
-
-if (mode == 1 and global.run_virtual_ticks) and global.dsmCountdownTheme==1{ //dsm countdown theme
-    if global.setupTimer==900{
-        sound_play(CountdownThemeSnd)
+        faudio_fire_generator(SirenSnd);
     }
 }
 
