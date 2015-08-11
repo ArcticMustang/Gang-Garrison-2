@@ -15,9 +15,14 @@ endCount = 1;
 with Player if team != ArenaHUD.winners humiliated = 1;
 with Sentry if team != ArenaHUD.winners event_user(1);
 
-if global.myself.team == ArenaHUD.winners 
-|| global.myself.team == TEAM_SPECTATOR sound = VictorySnd;
-else sound = FailureSnd;
+if (global.myself.team == ArenaHUD.winners or global.myself.team == TEAM_SPECTATOR)
+{
+    sound = global.VictoryMusic;
+}
+else 
+{
+    sound = global.FailureMusic;
+}
 AudioControlPlaySong(sound, false);
 
 if ArenaHUD.redWins = global.caplimit { global.winners = TEAM_RED; }
