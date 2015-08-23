@@ -67,7 +67,6 @@
     global.timerPos = ini_read_real("Settings", "Timer Position", 0);
     global.killLogPos = ini_read_real("Settings", "Kill Log Position", 0);
     global.kothHudPos = ini_read_real("Settings", "KoTH HUD Position", 0);
-    global.consoleMode = ini_read_real("Settings", "Console Mode", CONSOLE_DISABLED);
     global.timerPos=ini_read_real("Settings","Timer Position", 0)
     global.killLogPos=ini_read_real("Settings","Kill Log Position", 0)
     global.kothHudPos=ini_read_real("Settings","KoTH HUD Position", 0)
@@ -154,9 +153,13 @@
     ini_write_real("Settings", "Show Extra Teammate Stats", global.showTeammateStats);
     ini_write_real("Settings", "Timer Position", global.timerPos);
     ini_write_real("Settings", "Kill Log Position", global.killLogPos);
+<<<<<<< HEAD
     ini_write_real("Settings", "KoTH HUD Position", global.kothHudPos);
     ini_write_real("Settings", "Console Mode", global.consoleMode);
     ini_write_real("Settings", "Fade Scoreboard", global.fadeScoreboard);
+=======
+    ini_write_real("Settings", "KoTH HUD Position", global.kothHudPos);
+>>>>>>> parent of 9023fa8... Merge branch 'fancyconsole' of github.com:nagn/Gang-Garrison-2 into fausnd+console
     ini_write_real("Settings", "ServerPluginsPrompt", global.serverPluginsPrompt);
     ini_write_real("Settings", "RestartPrompt", global.restartPrompt);
     ini_write_string("Server", "MapRotation", customMapRotationFile);
@@ -462,10 +465,10 @@ global.launchMap = "";
     global.changeTeam = ini_read_real("Controls", "changeTeam", ord("N"));
     global.changeClass = ini_read_real("Controls", "changeClass", ord("M"));
     global.showScores = ini_read_real("Controls", "showScores", vk_shift);
-    global.openConsole = ini_read_real("Controls", "openConsole", ord("P"));
     ini_close();
     
     calculateMonthAndDay();
+<<<<<<< HEAD
     
     builder_init();
 
@@ -492,6 +495,9 @@ global.launchMap = "";
     if(global.FaucetMusic != -1)
         faudio_volume_generator(global.FaucetMusic, 0.8);
 
+=======
+
+>>>>>>> parent of 9023fa8... Merge branch 'fancyconsole' of github.com:nagn/Gang-Garrison-2 into fausnd+console
     if(!directory_exists(working_directory + "\Plugins")) directory_create(working_directory + "\Plugins");
     loadplugins();
     
