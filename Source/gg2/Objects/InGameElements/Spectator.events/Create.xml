@@ -47,7 +47,7 @@ myTeam = TEAM_SPECTATOR;
 if (global.myself != -1)
 {
     myTeam = global.myself.team;
-} 
+}
 
 // only auto-track if not on a team
 if (myTeam == TEAM_SPECTATOR)
@@ -60,9 +60,11 @@ else
     player = global.myself;
 }
 // so you can actually see the initial tracking
-//io_clear();
-//stop chat from being cleared when you die
-keyboard_clear(keyboard_key)
+// back up keyboard string because io_clear clears it
+var _keyboard_string;
+_keyboard_string = keyboard_string;
+io_clear();
+keyboard_string = _keyboard_string;
 </argument>
       </arguments>
     </action>
