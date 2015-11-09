@@ -115,6 +115,22 @@ if((afktimer&lt;=0) and global.isHost==false)
     with(Client)
         instance_destroy();
 }
+
+// drag panning
+if (mouse_check_button_pressed(mb_middle))
+{
+    _mx = window_mouse_get_x();
+    _my = window_mouse_get_y();
+}
+if (mouse_check_button(mb_middle))
+{
+    __mx = window_mouse_get_x();
+    __my = window_mouse_get_y();
+    x += _mx - __mx;
+    y += _my - __my;
+    _mx = __mx;
+    _my = __my;
+}
 </argument>
       </arguments>
     </action>
