@@ -176,6 +176,8 @@ global.chatHide=0
 global.chatHideJustChanged=0
 global.enablePrimeNo=0
 global.dsmChatID=noone
+global.isUsingChat=0
+global.ping=0
 
 //Run other DSM scripts
 console_init()
@@ -186,6 +188,7 @@ stats_init()
 chatFix_miku()
 chat_paste()
 chat_hide()
+global.cheatycheat=-1
 
 if(!directory_exists(working_directory+"\Custom")) directory_create(working_directory+"\Custom")
 if(!directory_exists(working_directory+"\ConsoleLogs")) directory_create(working_directory+"\ConsoleLogs")

@@ -91,11 +91,11 @@ global.HaxxyBadges[30] = 'Badge_Rifleman';
 global.HaxxyBadges[31] = 'Badge_Moneybag';
 global.HaxxyBadges[32] = 'Badge_ChessWhite';
 global.HaxxyBadges[33] = 'Badge_ChessBlack';
-global.HaxxyBadges[34] = 'Badge_BasketBall';
-global.HaxxyBadges[35] = 'Badge_RocketJump';
+global.HaxxyBadges[34] = 'Badge_B-BallBlitz';
+global.HaxxyBadges[35] = 'Badge_Elton-Jump-athon';
 global.HaxxyBadges[36] = 'Badge_2spooky4u';
-global.HaxxyBadges[37] = 'Badge_Ins';
-global.HaxxyBadges[38] = 'Badge_FriedChicken';
+global.HaxxyBadges[37] = 'Badge_Rebel-ution';
+global.HaxxyBadges[38] = 'Badge_GloryDays';
 
 // Makes array of Golden Accessory overlay sprites
 // Pre-initialize array to detect if sprites should be reused

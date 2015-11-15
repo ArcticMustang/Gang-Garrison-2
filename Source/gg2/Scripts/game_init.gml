@@ -17,7 +17,7 @@
     
     var customMapRotationFile, restart;
     restart = false;
-	
+
     initializeDamageSources();
     
     //import wav files for music
@@ -468,8 +468,8 @@ global.launchMap = "";
     calculateMonthAndDay();
     
     builder_init();
-	
-	character_init();
+
+character_init();
 
     DSM_init()
 

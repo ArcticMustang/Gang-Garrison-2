@@ -22,7 +22,7 @@ if (instance_exists(ScoreTableController))
     if (ScoreTableController.showadmin)
         kickOpen = true;
     
-if(instance_exists(TeamSelectController) || instance_exists(ClassSelectController) || kickOpen)
+if(instance_exists(TeamSelectController) || instance_exists(ClassSelectController) || kickOpen || instance_exists(Console)/* || instance_exists(global.cheatycheat)*/)
     menuOpen = true;
 else
     menuOpen = false;
@@ -54,10 +54,12 @@ if keyboard_check_pressed(global.dsmReduceEyePain){
 }
 
 //Checking for input - Mapped Keys
+if !instance_exists(Console) /*or !instance_exists(global.cheatycheat)*/{
 if(keyboard_check_pressed(global.changeTeam))
     inputChangeTeam();
 if(keyboard_check_pressed(global.changeClass))
     inputChangeClass();
+}
 
 event_user(8);
 

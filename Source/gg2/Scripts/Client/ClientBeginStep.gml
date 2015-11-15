@@ -146,7 +146,9 @@ do {
                     global.serverPluginsInUse = true;
                     
                     //load dsm chat
-                    loadDSMChat()
+                    if global.isUsingChat=1{
+                        loadDSMChat()
+                    }
                 }
             }
             noReloadPlugins = false;
@@ -221,9 +223,11 @@ do {
             player.name = receivestring(global.serverSocket, 1);
                   
             ds_list_add(global.players, player);
-            if(ds_list_size(global.players)-1 == global.playerID) {
-                global.myself = player;
-                instance_create(0,0,PlayerControl);
+            if (!global.isPlayingReplay){
+                if(ds_list_size(global.players)-1 == global.playerID) {
+                    global.myself = player;
+                    instance_create(0,0,PlayerControl);
+                }
             }
             break;
             

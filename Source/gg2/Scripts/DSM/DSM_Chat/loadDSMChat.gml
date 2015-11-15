@@ -1,3 +1,4 @@
+global.cheatycheat = object_add();
 if global.dsmUseDSMChat==0 exit;
 
 global.chatSendBuffer = buffer_create();

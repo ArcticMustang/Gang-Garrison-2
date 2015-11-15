@@ -109,3 +109,7 @@ if(instance_exists(GameServer))
         GameServer.hostSeenMOTD = true;
     }
 }
+
+with(KillLog){
+    ds_list_clear(kills)
+}

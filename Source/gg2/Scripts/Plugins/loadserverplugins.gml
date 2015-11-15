@@ -55,7 +55,9 @@ for (i = 0; i < ds_list_size(list); i += 1)
     tempdir = temp_directory + "\" + pluginname + ".tmp";
     
     if global.dsmUseDSMChat==1{
-        if (pluginname == 'chat_v2' or pluginname == 'chat') continue;
+        if (pluginname == 'chat_v2' or pluginname == 'chat'){
+            continue;
+        }
     }
 
     // check to see if we have a local copy for debugging
@@ -212,6 +214,7 @@ if (!failed)
         if global.dsmUseDSMChat==1{
             if (pluginname == 'chat_v2' or pluginname == 'chat'){
                 global.dsmChatID=i
+                global.isUsingChat=1
                 continue;
             }
         }
