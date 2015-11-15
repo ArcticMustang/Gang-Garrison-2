@@ -17,6 +17,8 @@
 ping =-1
 pingRunning=false
 cooldown=0
+
+global.ping=ping
 </argument>
       </arguments>
     </action>

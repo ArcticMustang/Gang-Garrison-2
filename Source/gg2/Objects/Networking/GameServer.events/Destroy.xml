@@ -34,8 +34,11 @@ with(PlayerControl)
 with(Console)
     instance_destroy();
 
-with(DSM_Chatbox)
-    instance_destroy();
+if instance_exists(DSM_Chatbox){
+    global.isUsingChat=0
+    with(DSM_Chatbox)
+        instance_destroy();
+}
     
 if (global.attemptPortForward and portForwarded)
     upnp_release_port(string(global.hostingPort), "TCP")

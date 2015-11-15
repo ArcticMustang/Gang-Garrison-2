@@ -29,4 +29,5 @@
   <resource name="console_command_autokill" type="RESOURCE"/>
   <resource name="console_command_record" type="RESOURCE"/>
   <resource name="console_command_stop" type="RESOURCE"/>
+  <resource name="console_command_mute" type="RESOURCE"/>
 </resources>

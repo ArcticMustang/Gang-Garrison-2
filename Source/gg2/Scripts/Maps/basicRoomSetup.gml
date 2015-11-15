@@ -7,7 +7,7 @@ global.totalMapAreas = 1+instance_number(NextAreaO);
 
 if global.totalMapAreas > 1 {
     global.area[1] = 0;
-    
+
     for(i=2;i<=global.totalMapAreas;i+=1) {
         global.area[i] = instance_find(NextAreaO,i-2).y;
     }
@@ -81,9 +81,9 @@ if (!instance_exists(KillLog))
 // Oh hey, I don't actually need to create a dedicated stop all generators function
 faudio_stop_generator(-1);
 global.IngameMusic = faudio_new_generator(global.IngameMusicS);
-if(global.music == MUSIC_BOTH || global.music == MUSIC_INGAME_ONLY) 
+if(global.music == MUSIC_BOTH || global.music == MUSIC_INGAME_ONLY)
 {
-    
+
     if(global.IngameMusic != -1)
     {
         faudio_volume_generator(global.IngameMusic, 0.8);

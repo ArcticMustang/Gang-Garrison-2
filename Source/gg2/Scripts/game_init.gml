@@ -4,7 +4,7 @@
     set_little_endian_global(true);
     if file_exists("game_errors.log") file_delete("game_errors.log");
     if file_exists("last_plugin.log") file_delete("last_plugin.log");
-    
+
     // Delete old left-over files created by the updater
     var backupFilename;
     backupFilename = file_find_first("gg2-old.delete.me.*", 0);
@@ -14,11 +14,12 @@
         backupFilename = file_find_next();
     }
     file_find_close();
-    
+
     var customMapRotationFile, restart;
     restart = false;
+
     initializeDamageSources();
-    
+
     //import wav files for music
     global.MenuMusic=sound_add(choose("Music/menumusic1.wav","Music/menumusic2.wav","Music/menumusic3.wav","Music/menumusic4.wav","Music/menumusic5.wav","Music/menumusic6.wav"), 1, true);
     global.IngameMusic=sound_add("Music/ingamemusic.wav", 1, true);
@@ -29,16 +30,16 @@
         sound_volume(global.IngameMusic, 0.8);
     if(global.FaucetMusic != -1)
         sound_volume(global.FaucetMusic, 0.8);
-    
+
     global.sendBuffer = buffer_create();
     global.tempBuffer = buffer_create();
     global.HudCheck = false;
     global.map_rotation = ds_list_create();
-    
+
     global.CustomMapCollisionSprite = -1;
-    
+
     window_set_region_scale(-1, false);
-    
+
     ini_open("gg2.ini");
     global.playerName = ini_read_string("Settings", "PlayerName", "Player");
     global.playerName = string_copy(global.playerName, 0, min(string_length(global.playerName), MAX_PLAYERNAME_LENGTH));
@@ -47,7 +48,7 @@
     global.hostingPort = ini_read_real("Settings", "HostingPort", 8190);
     global.music = ini_read_real("Settings", "Music", ini_read_real("Settings", "IngameMusic", MUSIC_BOTH));
     global.playerLimit = ini_read_real("Settings", "PlayerLimit", 10);
-    
+
     global.multiClientLimit = ini_read_real("Settings", "MultiClientLimit", 3);
     global.particles =  ini_read_real("Settings", "Particles", PARTICLES_NORMAL);
     global.gibLevel = ini_read_real("Settings", "Gib Level", 3);
@@ -88,7 +89,7 @@
     global.rewardId = ini_read_string("Haxxy", "RewardId", "");
     global.mapdownloadLimitBps = ini_read_real("Server", "Total bandwidth limit for map downloads in bytes per second", 50000);
     global.updaterBetaChannel = ini_read_real("General", "UpdaterBetaChannel", isBetaVersion());
-    global.attemptPortForward = ini_read_real("Server", "Attempt UPnP Forwarding", 0); 
+    global.attemptPortForward = ini_read_real("Server", "Attempt UPnP Forwarding", 0);
     global.serverPluginList = ini_read_string("Server", "ServerPluginList", "");
     global.serverPluginsRequired = ini_read_real("Server", "ServerPluginsRequired", 0);
     if (string_length(global.serverPluginList) > 254) {
@@ -105,7 +106,7 @@
     global.backgroundTitle = ini_read_string("Background", "BackgroundTitle", "");
     global.backgroundURL = ini_read_string("Background", "BackgroundURL", "");
     global.backgroundShowVersion = ini_read_real("Background", "BackgroundShowVersion", true);
-    
+
     global.resolutionkind = ini_read_real("Settings", "Resolution", 1);
     global.frameratekind = ini_read_real("Settings", "Framerate", 0);
     if(global.frameratekind == 1){
@@ -117,8 +118,8 @@
     //}//else if(global.frameratekind == 3){
         //global.game_fps = 1000
     //}
-    
-    
+
+
     readClasslimitsFromIni();
 
     //thy playerlimit shalt not exceed 48!
@@ -128,7 +129,7 @@
         if (global.dedicatedMode != 1)
             show_message("Warning: Player Limit cannot exceed 48. It has been set to 48");
     }
-    
+
     global.currentMapArea=1;
     global.totalMapAreas=1;
     global.setupTimer=1800;
@@ -137,7 +138,7 @@
     // Create plugin packet maps
     global.pluginPacketBuffers = ds_map_create();
     global.pluginPacketPlayers = ds_map_create();
-        
+
     ini_write_string("Settings", "PlayerName", global.playerName);
     ini_write_real("Settings", "Fullscreen", global.fullscreen);
     ini_write_real("Settings", "UseLobby", global.useLobbyServer);
@@ -174,9 +175,9 @@
     ini_write_real("Server", "Time Limit", global.timeLimitMins);
     ini_write_string("Server", "Password", global.serverPassword);
     ini_write_real("General", "UpdaterBetaChannel", global.updaterBetaChannel);
-    ini_write_real("Server", "Attempt UPnP Forwarding", global.attemptPortForward); 
-    ini_write_string("Server", "ServerPluginList", global.serverPluginList); 
-    ini_write_real("Server", "ServerPluginsRequired", global.serverPluginsRequired); 
+    ini_write_real("Server", "Attempt UPnP Forwarding", global.attemptPortForward);
+    ini_write_string("Server", "ServerPluginList", global.serverPluginList);
+    ini_write_real("Server", "ServerPluginsRequired", global.serverPluginsRequired);
     ini_write_string("Settings", "CrosshairFilename", CrosshairFilename);
     ini_write_real("Settings", "CrosshairRemoveBG", CrosshairRemoveBG);
     ini_write_real("Settings", "Queued Jumping", global.queueJumping);
@@ -186,7 +187,7 @@
     ini_write_string("Background", "BackgroundTitle", global.backgroundTitle);
     ini_write_string("Background", "BackgroundURL", global.backgroundURL);
     ini_write_real("Background", "BackgroundShowVersion", global.backgroundShowVersion);
-    
+
     ini_write_real("Classlimits", "Scout", global.classlimits[CLASS_SCOUT])
     ini_write_real("Classlimits", "Pyro", global.classlimits[CLASS_PYRO])
     ini_write_real("Classlimits", "Soldier", global.classlimits[CLASS_SOLDIER])
@@ -203,19 +204,19 @@
 
     rooms_fix_views();
     global.changed_resolution = false;
-    
+
     //screw the 0 index we will start with 1
-    //map_truefort 
+    //map_truefort
     maps[1] = ini_read_real("Maps", "ctf_truefort", 1);
-    //map_2dfort 
+    //map_2dfort
     maps[2] = ini_read_real("Maps", "ctf_2dfort", 2);
-    //map_conflict 
+    //map_conflict
     maps[3] = ini_read_real("Maps", "ctf_conflict", 3);
-    //map_classicwell 
+    //map_classicwell
     maps[4] = ini_read_real("Maps", "ctf_classicwell", 4);
-    //map_waterway 
+    //map_waterway
     maps[5] = ini_read_real("Maps", "ctf_waterway", 5);
-    //map_orange 
+    //map_orange
     maps[6] = ini_read_real("Maps", "ctf_orange", 6);
     //map_dirtbowl
     maps[7] = ini_read_real("Maps", "cp_dirtbowl", 7);
@@ -237,7 +238,7 @@
     maps[15] = ini_read_real("Maps", "dkoth_atalia", 15);
     //dkoth_sixties
     maps[16] = ini_read_real("Maps", "dkoth_sixties", 16);
-    
+
     //Server respawn time calculator. Converts each second to a frame. (read: multiply by 30 :hehe:)
     if (global.Server_RespawntimeSec == 0)
     {
@@ -245,12 +246,12 @@
     }
     else
     {
-        global.Server_Respawntime = global.Server_RespawntimeSec * 30;    
+        global.Server_Respawntime = global.Server_RespawntimeSec * 30;
     }
-    
+
     // I have to include this, or the client'll complain about an unknown variable.
     global.mapchanging = false;
-    
+
     ini_write_real("Maps", "ctf_truefort", maps[1]);
     ini_write_real("Maps", "ctf_2dfort", maps[2]);
     ini_write_real("Maps", "ctf_conflict", maps[3]);
@@ -269,7 +270,7 @@
     ini_write_real("Maps", "dkoth_sixties", maps[16]);
 
     ini_close();
-    
+
     // parse the protocol version UUID for later use
     global.protocolUuid = buffer_create();
     parseUuid(PROTOCOL_UUID, global.protocolUuid);
@@ -279,12 +280,12 @@
 
     // Create abbreviations array for rewards use
     initRewards()
-    
+
 var a, IPRaw, portRaw;
 doubleCheck=0;
 global.launchMap = "";
 
-    for(a = 1; a <= parameter_count(); a += 1) 
+    for(a = 1; a <= parameter_count(); a += 1)
     {
         if (parameter_string(a) == "-dedicated")
         {
@@ -324,17 +325,17 @@ global.launchMap = "";
             global.dedicatedMode = 1;
         }
     }
-    
+
     if (doubleCheck == 2)
     {
         global.serverPort = real(portRaw);
         global.serverIP = IPRaw;
         global.isHost = false;
         instance_create(0,0,Client);
-    }   
-    
-    global.customMapdesginated = 0;    
-    
+    }
+
+    global.customMapdesginated = 0;
+
     // if the user defined a valid map rotation file, then load from there
 
     if(customMapRotationFile != "" && file_exists(customMapRotationFile) && global.launchMap == "") {
@@ -354,12 +355,12 @@ global.launchMap = "";
         }
         file_text_close(fileHandle);
     }
-    
+
      else if (global.launchMap != "") && (global.dedicatedMode == 1)
-        {  
+        {
         ds_list_add(global.map_rotation, global.launchMap);
         }
-    
+
      else { // else load from the ini file Maps section
         //Set up the map rotation stuff
         var i, sort_list;
@@ -368,7 +369,7 @@ global.launchMap = "";
             if(maps[i] != 0) ds_list_add(sort_list, ((100*maps[i])+i));
         }
         ds_list_sort(sort_list, 1);
-        
+
         // translate the numbers back into the names they represent
         for(i=0; i < ds_list_size(sort_list); i += 1) {
             switch(ds_list_find_value(sort_list, i) mod 100) {
@@ -420,33 +421,33 @@ global.launchMap = "";
                 case 16:
                     ds_list_add(global.map_rotation, "dkoth_sixties");
                 break;
-                    
+
             }
         }
         ds_list_destroy(sort_list);
     }
-    
+
     window_set_fullscreen(global.fullscreen);
-    
+
     global.gg2Font = font_add_sprite(gg2FontS,ord("!"),false,0);
     global.countFont = font_add_sprite(countFontS, ord("0"),false,2);
     global.timerFont = font_add_sprite(timerFontS, ord("0"),true,5);
     draw_set_font(global.gg2Font);
     cursor_sprite = CrosshairS;
     global.dealDamageFunction = ""; // executed after dealDamage, with same args
-    
+
     if(!directory_exists(working_directory + "\Maps")) directory_create(working_directory + "\Maps");
-    
+
     instance_create(0, 0, AudioControl);
     instance_create(0, 0, SSControl);
-    
+
     // custom dialog box graphics
     message_background(popupBackgroundB);
     message_button(popupButtonS);
     message_text_font("Century",9,c_white,1);
     message_button_font("Century",9,c_white,1);
     message_input_font("Century",9,c_white,0);
-    
+
     //Key Mapping
     ini_open("controls.gg2");
     global.jump = ini_read_real("Controls", "jump", ord("W"));
@@ -465,19 +466,20 @@ global.launchMap = "";
     global.changeClass = ini_read_real("Controls", "changeClass", ord("M"));
     global.showScores = ini_read_real("Controls", "showScores", vk_shift);
     ini_close();
-    
+
     calculateMonthAndDay();
-    
+
     builder_init();
+
     character_init();
 
     DSM_init()
 
-    if(!directory_exists(working_directory + "\DSM_Plugins")) directory_create(working_directory + "\DSM_Plugins");    
+    if(!directory_exists(working_directory + "\DSM_Plugins")) directory_create(working_directory + "\DSM_Plugins");
         loadplugins();
 
     character_init();
-    
+
     //import wav files for music
     audio_init()
     global.MenuMusicS=ds_list_create();
@@ -488,27 +490,27 @@ global.launchMap = "";
     ds_list_add(global.MenuMusicS, faudio_new_sample("Music/Elkondo - Right Behind You.ogg"));
     ds_list_add(global.MenuMusicS, faudio_new_sample("Music/Father of Syn - Gang Garrison II.ogg"));
     ds_list_add(global.MenuMusicS, faudio_new_sample("Music/Scoot - Rocket Jump Waltz.ogg"));
-    
+
     global.IngameMusicS=faudio_new_sample("Music/ingamemusic.ogg");
-    
+
     global.FaucetMusicS=faudio_new_sample("Music/faucetmusic.ogg");
     global.FaucetMusic=faudio_new_generator(global.FaucetMusicS);
     global.VictoryMusic = faudio_new_sample("Music/Victory.ogg");
     global.FailureMusic = faudio_new_sample("Music/Failure.ogg");
     if(global.FaucetMusic != -1)
         faudio_volume_generator(global.FaucetMusic, 0.8);
-    
+
     globalvar previous_window_x, previous_window_y, previous_window_w;
     previous_window_x = window_get_x();
     previous_window_y = window_get_y();
     previous_window_w = window_get_width();
-    
+
     if (file_exists(CrosshairFilename))
     {
         sprite_replace(CrosshairS,CrosshairFilename,1,CrosshairRemoveBG,false,0,0);
         sprite_set_offset(CrosshairS,sprite_get_width(CrosshairS)/2,sprite_get_height(CrosshairS)/2);
     }
-    
+
     if(global.dedicatedMode == 1) {
         AudioControlToggleMute();
         room_goto_fix(Menu);

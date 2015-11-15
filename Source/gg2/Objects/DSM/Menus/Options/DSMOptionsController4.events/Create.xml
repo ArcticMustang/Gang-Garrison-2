@@ -40,7 +40,7 @@
     //')
     
     menu_addedit_boolean("Write Chat Log To File:","global.dsmWriteChatLog",'
-        DSM_write_ini("Settings",DSMWriteChatLog",argument0)
+        DSM_write_ini("Settings","DSMWriteChatLog",argument0)
     ')
     
     menu_addtablink("DSM 1", '

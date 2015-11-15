@@ -38,6 +38,11 @@ if !global.isHost{
         cooldown-=1
     }
 }
+
+global.ping=ping
+if global.ping==-1{
+    global.ping=0
+}
 </argument>
       </arguments>
     </action>
